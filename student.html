@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campus Flow 学生アプリ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800&family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  body { background: #EAF2F8; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px 16px; }
+  body.bare { background: transparent; padding: 0; }
+
+  .phone { width: 390px; height: 844px; background: #fff; border-radius: 46px; border: 12px solid #16191C; position: relative; overflow: hidden; box-shadow: 0 20px 50px rgba(11,63,110,.18); flex: none; }
+  .notch { position: absolute; top: 8px; left: 50%; transform: translateX(-50%); width: 112px; height: 30px; background: #16191C; border-radius: 16px; z-index: 1000; }
+  .status { height: 48px; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 28px 6px; font-size: 14px; font-weight: 800; position: relative; z-index: 900; }
+  .screen { position: absolute; top: 48px; bottom: 78px; left: 0; right: 0; display: none; flex-direction: column; }
+  .screen.on { display: flex; }
+
+  /* タブバー */
+  .tabs { position: absolute; bottom: 0; left: 0; right: 0; height: 78px; background: #fff; border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(4, 1fr); padding-bottom: 14px; z-index: 900; }
+  .tabs button { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 11px; font-weight: 800; color: var(--ink-3); }
+  .tabs button svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+  .tabs button.on { color: var(--blue-700); }
+
+  .head { padding: 6px 18px 12px; }
+  .head h1 { font-size: 24px; font-weight: 900; }
+  .head p { font-size: 12px; font-weight: 700; color: var(--ink-3); margin-top: 2px; }
+
+  /* マップ */
+  #map { position: absolute; inset: 0; background: #EEF3F6; }
+  .leaflet-container { font-family: "Noto Sans JP", sans-serif; }
+  .leaflet-tile-pane { filter: grayscale(.85) contrast(.95) brightness(1.04); }
+  .map-top { position: absolute; top: 4px; left: 12px; right: 12px; z-index: 800; }
+  .search { background: #fff; border-radius: 10px; padding: 11px 14px; font-size: 14px; font-weight: 800; box-shadow: 0 2px 10px rgba(0,0,0,.1); display: flex; justify-content: space-between; align-items: center; }
+  .search span { color: var(--ink-3); font-weight: 700; font-size: 12px; }
+  .days { display: flex; gap: 5px; margin-top: 8px; }
+  .days button { flex: 1; background: #fff; border-radius: 7px; padding: 7px 0; font-size: 13px; font-weight: 900; color: var(--ink-2); box-shadow: 0 1px 6px rgba(0,0,0,.08); }
+  .days button.on { background: var(--blue-700); color: #fff; }
+  .timebox { margin-top: 8px; background: #fff; border-radius: 10px; padding: 9px 14px 6px; box-shadow: 0 1px 6px rgba(0,0,0,.08); }
+  .timebox.live { display: flex; align-items: center; gap: 8px; padding: 9px 14px; font-size: 13px; font-weight: 800; color: var(--ink-2); }
+  .timebox.live b { font-size: 16px; color: var(--ink); }
+  .timebox.live .upd { margin-left: auto; font-size: 11px; color: var(--ink-3); }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--cyan-400); box-shadow: 0 0 0 0 rgba(47,205,234,.6); animation: pulse 1.6s infinite; }
+  @keyframes pulse { 70% { box-shadow: 0 0 0 7px rgba(47,205,234,0); } 100% { box-shadow: 0 0 0 0 rgba(47,205,234,0); } }
+  .rank li { list-style: none; display: grid; grid-template-columns: 1fr 92px 46px; gap: 10px; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); cursor: pointer; }
+  .rank .nm { font-size: 15px; font-weight: 900; }
+  .rank .nm small { display: block; font-size: 11px; font-weight: 700; color: var(--ink-3); margin-top: 1px; }
+  .rank .bar { height: 10px; background: var(--sky-100); border-radius: 5px; overflow: hidden; }
+  .rank .bar i { display: block; height: 100%; border-radius: 5px; transition: width .6s; }
+  .rank .p { font-size: 17px; text-align: right; }
+  .seg { display: flex; gap: 6px; padding: 0 18px 10px; }
+  .seg button { padding: 7px 12px; border-radius: 18px; border: 1.5px solid var(--line); font-size: 12px; font-weight: 800; color: var(--ink-2); }
+  .seg button.on { background: var(--blue-700); border-color: var(--blue-700); color: #fff; }
+  .timebox .sp { display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 800; color: var(--ink-2); }
+  .timebox .sp b { font-size: 18px; color: var(--ink); }
+  input[type=range] { width: 100%; accent-color: var(--blue-700); margin-top: 4px; }
+  .now-btn { font-size: 11px; font-weight: 900; color: var(--blue-700); background: var(--sky-100); padding: 3px 8px; border-radius: 4px; }
+  .map-legend { position: absolute; right: 12px; top: 112px; z-index: 800; background: #fff; border-radius: 8px; padding: 7px 10px; box-shadow: 0 1px 6px rgba(0,0,0,.1); }
+  .map-legend .legend { font-size: 10px; gap: 3px; }
+  .map-legend .sw { width: 14px; height: 10px; }
+
+  .pin { display: flex; flex-direction: column; align-items: center; transform: translateY(-4px); }
+  .pin .bub { border-radius: 8px; padding: 4px 8px; font-size: 12px; font-weight: 900; white-space: nowrap; border: 2px solid #fff; box-shadow: 0 2px 6px rgba(0,0,0,.18); line-height: 1.25; text-align: center; }
+  .pin .bub small { display: block; font-size: 10px; font-weight: 800; opacity: .9; }
+  .pin .tail { width: 10px; height: 10px; transform: rotate(45deg); margin-top: -6px; border-right: 2px solid #fff; border-bottom: 2px solid #fff; }
+
+  .sheet { position: absolute; left: 0; right: 0; bottom: 0; z-index: 800; background: #fff; border-radius: 18px 18px 0 0; box-shadow: 0 -4px 16px rgba(0,0,0,.08); padding: 10px 18px 14px; }
+  .sheet .grab { width: 40px; height: 4px; border-radius: 2px; background: #D6DEE4; margin: 0 auto 10px; }
+  .sheet .t { display: flex; justify-content: space-between; align-items: flex-start; }
+  .sheet h3 { font-size: 18px; font-weight: 900; }
+  .sheet .meta { font-size: 12px; font-weight: 700; color: var(--ink-3); margin-top: 2px; }
+  .sheet .pct { font-size: 34px; line-height: 1; text-align: right; }
+  .sheet .pct small { display: block; font-size: 11px; font-family: "Noto Sans JP"; font-weight: 800; text-align: right; margin-top: 3px; }
+  .mini { display: grid; grid-template-columns: repeat(13, 1fr); gap: 2px; margin-top: 10px; }
+  .mini div { height: 22px; border-radius: 2px; }
+  .mini-l { display: grid; grid-template-columns: repeat(13, 1fr); font-size: 9px; font-weight: 800; color: var(--ink-3); margin-top: 2px; }
+  .hint { margin-top: 10px; font-size: 13px; font-weight: 800; background: var(--sky-50); border: 1.5px solid #BFE4F7; border-radius: 8px; padding: 8px 12px; }
+  .hint b { color: var(--blue-700); font-weight: 900; }
+
+  /* 空き時間 */
+  .scroll { overflow-y: auto; flex: 1; padding: 0 18px 16px; }
+  .fchips { display: flex; gap: 6px; overflow-x: auto; padding: 0 18px 12px; scrollbar-width: none; }
+  .fchips button { flex: none; padding: 8px 13px; border-radius: 18px; border: 1.5px solid var(--line); font-size: 13px; font-weight: 800; color: var(--ink-2); }
+  .fchips button.on { background: var(--blue-700); border-color: var(--blue-700); color: #fff; }
+  .wk { display: grid; grid-template-columns: 26px repeat(6, 1fr); gap: 3px; }
+  .wk .h { font-size: 13px; font-weight: 900; text-align: center; color: var(--ink-2); padding-bottom: 2px; }
+  .wk .tl { font-size: 10px; font-weight: 800; color: var(--ink-3); display: flex; align-items: center; }
+  .wk .c { height: 26px; border-radius: 3px; }
+  .wk .c.now { outline: 2.5px solid var(--ink); outline-offset: -1px; }
+  .best { margin-top: 14px; }
+  .best h4 { font-size: 15px; font-weight: 900; margin-bottom: 8px; }
+  .best li { list-style: none; display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 8px; margin-bottom: 6px; font-size: 14px; font-weight: 800; }
+
+  /* 予約 */
+  .rv-card { border: 1.5px solid var(--line); border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; }
+  .rv-card h4 { font-size: 15px; font-weight: 900; display: flex; justify-content: space-between; align-items: center; }
+  .rv-card p { font-size: 12px; font-weight: 700; color: var(--ink-3); margin-top: 2px; }
+  .slots { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 10px; }
+  .slots button { padding: 8px 0; border-radius: 6px; font-size: 13px; font-weight: 900; background: var(--sky-100); color: var(--blue-700); border: 1.5px solid #BFE4F7; }
+  .slots button.full { background: #F1F3F5; color: #B6BBC0; border-color: #F1F3F5; text-decoration: line-through; cursor: default; }
+  .slots button.mine { background: var(--blue-700); color: #fff; border-color: var(--blue-700); }
+  .toast { position: absolute; left: 18px; right: 18px; bottom: 92px; background: var(--ink); color: #fff; border-radius: 10px; padding: 12px 14px; font-size: 13px; font-weight: 800; z-index: 1001; opacity: 0; transform: translateY(8px); transition: .25s; pointer-events: none; }
+  .toast.on { opacity: 1; transform: none; }
+
+  /* チャット */
+  .chat { flex: 1; overflow-y: auto; padding: 4px 16px 10px; display: flex; flex-direction: column; gap: 10px; }
+  .msg { max-width: 82%; padding: 10px 13px; border-radius: 14px; font-size: 14px; font-weight: 700; line-height: 1.55; }
+  .msg.bot { background: #F0F4F7; align-self: flex-start; border-bottom-left-radius: 4px; }
+  .msg.me { background: var(--blue-700); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+  .msg b { color: var(--blue-700); font-weight: 900; }
+  .msg .mbar { height: 8px; background: #fff; border-radius: 4px; margin-top: 6px; overflow: hidden; }
+  .msg .mbar i { display: block; height: 100%; border-radius: 4px; }
+  .quick { display: flex; gap: 6px; overflow-x: auto; padding: 8px 16px; scrollbar-width: none; border-top: 1px solid var(--line); }
+  .quick button { flex: none; padding: 8px 12px; border-radius: 18px; border: 1.5px solid var(--blue-500); color: var(--blue-700); font-size: 12px; font-weight: 800; }
+  .composer { display: flex; gap: 8px; padding: 6px 16px 8px; }
+  .composer input { flex: 1; border: 1.5px solid var(--line); border-radius: 20px; padding: 9px 14px; font: inherit; font-size: 14px; font-weight: 700; outline: none; }
+  .composer button { width: 40px; height: 40px; border-radius: 50%; background: var(--blue-700); display: grid; place-items: center; }
+  .composer svg { width: 18px; height: 18px; stroke: #fff; fill: none; stroke-width: 2.4; }
+</style>
+</head>
+<body>
+<div class="phone" id="phone">
+  <div class="notch"></div>
+  <div class="status"><span class="num">12:40</span><span>●●● 5G</span></div>
+
+  <!-- マップ -->
+  <section class="screen on" id="s-map">
+    <div id="map"></div>
+    <div class="map-top">
+      <div class="search">駿河台キャンパス<span>明治大学</span></div>
+      <div class="timebox live"><span class="dot"></span><span>リアルタイム混雑</span><b class="num" id="tlabel">12:40</b><span class="upd" id="upd">たった今 更新</span></div>
+    </div>
+    <div class="map-legend"><div class="legend"><span>空</span><span class="sw lv0"></span><span class="sw lv1"></span><span class="sw lv2"></span><span class="sw lv3"></span><span class="sw lv4"></span><span>混</span></div></div>
+    <div class="sheet" id="sheet"></div>
+  </section>
+
+  <!-- いま空いてる -->
+  <section class="screen" id="s-time">
+    <div class="head"><h1>いま空いている場所</h1><p><span class="dot" style="display:inline-block;margin-right:6px;"></span>AIカメラのリアルタイム推定・空いている順</p></div>
+    <div class="seg" id="seg"><button data-t="all" class="on">すべて</button><button data-t="cafeteria">学食</button><button data-t="library">図書館</button><button data-t="classroom">教室</button><button data-t="club">練習場</button></div>
+    <div class="scroll"><ul class="rank" id="rank"></ul></div>
+  </section>
+
+  <!-- 予約 -->
+  <section class="screen" id="s-reserve">
+    <div class="head"><h1>その場で予約</h1><p>4月17日（水）の空き枠</p></div>
+    <div class="scroll" id="rv"></div>
+  </section>
+
+  <!-- チャット -->
+  <section class="screen" id="s-chat">
+    <div class="head"><h1>キャンパス案内</h1><p>混雑状況を質問できます</p></div>
+    <div class="chat" id="chat"></div>
+    <div class="quick" id="quick"></div>
+    <div class="composer"><input id="cin" placeholder="例：今の学食は混んでる？"><button id="csend"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button></div>
+  </section>
+
+  <div class="toast" id="toast"></div>
+
+  <nav class="tabs" id="tabs">
+    <button data-s="map" class="on"><svg viewBox="0 0 24 24"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg>マップ</button>
+    <button data-s="time"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h11M4 18h7"/></svg>空き一覧</button>
+    <button data-s="reserve"><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>予約</button>
+    <button data-s="chat"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg>チャット</button>
+  </nav>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="assets/data.js"></script>
+<script>
+const { DAYS, HOURS, FACILITIES, occupancy, level, LEVEL_LABEL, LEVEL_COLOR, NOW, fmtTime, CAMPUS_CENTER } = CF;
+const params = new URLSearchParams(location.search);
+if (params.has('bare')) document.body.classList.add('bare');
+
+const state = { day: NOW.day, h: NOW.h, sel: 'lt-cafe' };
+const textOn = lv => lv >= 3 ? '#fff' : '#0B3F6E';
+
+// ---------- タブ ----------
+function tab(s) {
+  document.querySelectorAll('#tabs button').forEach(b => b.classList.toggle('on', b.dataset.s === s));
+  document.querySelectorAll('.screen').forEach(x => x.classList.toggle('on', x.id === 's-' + s));
+  if (s === 'map') setTimeout(() => { map.invalidateSize(); fitCampus(); }, 0);
+}
+document.querySelectorAll('#tabs button').forEach(b => b.onclick = () => tab(b.dataset.s));
+
+// ---------- マップ ----------
+const map = L.map('map', { zoomControl: false, attributionControl: true, zoomSnap: 0.25 });
+function fitCampus() { map.fitBounds(FACILITIES.map(f => [f.lat, f.lng]), { paddingTopLeft: [40, 190], paddingBottomRight: [40, 245], maxZoom: 18 }); }
+fitCampus();
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19, attribution: '© OpenStreetMap contributors'
+}).addTo(map);
+map.attributionControl.setPrefix('');
+
+const layers = {};
+FACILITIES.forEach(f => {
+  layers[f.id] = {
+    area: L.circle([f.lat, f.lng], { radius: f.type === 'classroom' ? 30 : 20, weight: 0, fillOpacity: 0.55 }).addTo(map),
+    pin: L.marker([f.lat, f.lng], { icon: L.divIcon({ className: '', html: '', iconSize: [0, 0] }) }).addTo(map),
+  };
+  layers[f.id].pin.on('click', () => { state.sel = f.id; render(); });
+  layers[f.id].area.on('click', () => { state.sel = f.id; render(); });
+});
+
+// リアルタイム：数秒ごとに小さく変動させて「ライブ」感を出す
+const live = {};
+function cur(f) { return Math.max(2, Math.min(99, occupancy(f, NOW.day, NOW.h) + (live[f.id || f] || 0))); }
+let updSec = 0;
+setInterval(() => {
+  FACILITIES.forEach(f => { live[f.id] = Math.max(-4, Math.min(4, (live[f.id] || 0) + Math.round((Math.random() - 0.5) * 3))); });
+  updSec = 0; render(); renderList();
+}, 5000);
+setInterval(() => { updSec++; document.getElementById('upd').textContent = updSec < 2 ? 'たった今 更新' : updSec + '秒前に更新'; }, 1000);
+
+function render() {
+  FACILITIES.forEach(f => {
+    const v = cur(f), lv = level(v), col = LEVEL_COLOR[lv];
+    layers[f.id].area.setStyle({ fillColor: col, fillOpacity: lv === 0 ? 0.75 : 0.55 });
+    const sel = state.sel === f.id;
+    layers[f.id].pin.setIcon(L.divIcon({
+      className: '', iconSize: [0, 0],
+      html: `<div class="pin" style="transform:translate(-50%,-100%);position:absolute;"><div class="bub" style="background:${col};color:${textOn(lv)};${sel ? 'outline:3px solid #211716;' : ''}">${f.short}<small>${LEVEL_LABEL[lv]} ${v}%</small></div><div class="tail" style="background:${col}"></div></div>`
+    }));
+    layers[f.id].pin.setZIndexOffset(sel ? 1000 : 0);
+  });
+  renderSheet();
+}
+
+function renderSheet() {
+  const f = FACILITIES.find(x => x.id === state.sel);
+  const v = cur(f), lv = level(v);
+  let cells = '', labels = '';
+  for (let h = 9; h <= 21; h++) {
+    const vv = occupancy(f, state.day, h + 0.5);
+    const isCur = Math.floor(state.h) === h;
+    cells += `<div class="lv${level(vv)}" style="${isCur ? 'outline:2.5px solid #211716;outline-offset:-1px;' : ''}"></div>`;
+    labels += `<span>${h % 3 === 0 ? h : ''}</span>`;
+  }
+  // 次に空く時間
+  let next = null;
+  for (let h = state.h + 0.25; h <= 21; h += 0.25) { if (occupancy(f, state.day, h) < 40) { next = h; break; } }
+  const hint = lv <= 1 ? `いまは<b>${LEVEL_LABEL[lv]}</b>。すぐ利用できます。`
+    : next ? `<b>${fmtTime(Math.round(next * 4) / 4)}</b>ごろから空き始める予測です。` : `本日は混雑が続く予測です。`;
+  const alt = f.type === 'cafeteria' && lv >= 3 ? `<br>近くの<b>${f.id === 'lt-cafe' ? '12号館カフェテリア' : 'リバティタワー学食'}</b>は ${cur(f.id === 'lt-cafe' ? 'b12-cafe' : 'lt-cafe')}%` : '';
+  document.getElementById('sheet').innerHTML = `<div class="grab"></div>
+    <div class="t"><div><h3>${f.place}${f.place === f.name ? '' : ' ' + f.name}</h3><div class="meta">${f.typeName}・いま ${fmtTime(state.h)}</div></div>
+    <div class="pct num" style="color:${lv >= 3 ? '#0B4F8A' : '#128FC9'}">${v}%<small>${LEVEL_LABEL[lv]}</small></div></div>
+    <div class="meta" style="margin-top:10px;">今日の混雑の流れ</div><div class="mini" style="margin-top:4px;">${cells}</div><div class="mini-l">${labels}</div>
+    <div class="hint">${hint}${alt}</div>`;
+}
+
+// ---------- いま空いてる一覧 ----------
+let seg = 'all';
+document.querySelectorAll('#seg button').forEach(b => b.onclick = () => {
+  seg = b.dataset.t; document.querySelectorAll('#seg button').forEach(x => x.classList.toggle('on', x === b)); renderList();
+});
+function renderList() {
+  const list = FACILITIES.filter(f => seg === 'all' || f.type === seg).map(f => ({ f, v: cur(f) })).sort((a, b) => a.v - b.v);
+  document.getElementById('rank').innerHTML = list.map(({ f, v }) => {
+    const lv = level(v);
+    return `<li data-id="${f.id}"><div class="nm">${f.place}${f.place === f.name ? '' : ' ' + f.name}<small>${f.typeName}・<span style="color:${lv >= 3 ? '#0B4F8A' : '#128FC9'}">${LEVEL_LABEL[lv]}</span></small></div>
+      <div class="bar"><i style="width:${v}%;background:${LEVEL_COLOR[Math.max(1, lv)]}"></i></div><div class="p num">${v}%</div></li>`;
+  }).join('');
+  document.querySelectorAll('#rank li').forEach(li => li.onclick = () => { state.sel = li.dataset.id; render(); tab('map'); });
+}
+
+// ---------- 予約 ----------
+const toast = document.getElementById('toast');
+function showToast(t) { toast.textContent = t; toast.classList.add('on'); clearTimeout(showToast.t); showToast.t = setTimeout(() => toast.classList.remove('on'), 2200); }
+const rvs = [
+  { nm: '図書館 グループ学習室', sub: '中央図書館 1階・4〜6人', slots: ['13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'], full: [0, 2, 3] },
+  { nm: '図書館 閲覧席（電源つき）', sub: '地下1階 閲覧室・1人', slots: ['13:00', '14:00', '15:00', '16:00'], full: [] },
+  { nm: 'アカデミーコモン 練習場B', sub: '軽音・ダンス・最大20人', slots: ['13:00', '15:00', '17:00', '19:00'], full: [2, 3] },
+  { nm: '学食 モバイルオーダー受取', sub: 'リバティタワー学食・生協アプリ連携', slots: ['12:50', '13:00', '13:10', '13:20'], full: [0] },
+];
+document.getElementById('rv').innerHTML = rvs.map((r, i) => `<div class="rv-card"><h4>${r.nm}<span class="tag blue">空き ${r.slots.length - r.full.length}</span></h4><p>${r.sub}</p>
+  <div class="slots">${r.slots.map((s, j) => `<button class="${r.full.includes(j) ? 'full' : ''}" data-i="${i}" data-s="${s}">${s}</button>`).join('')}</div></div>`).join('');
+document.querySelectorAll('#rv .slots button').forEach(b => b.onclick = () => {
+  if (b.classList.contains('full')) return;
+  b.classList.toggle('mine');
+  showToast(b.classList.contains('mine') ? `${rvs[b.dataset.i].nm} ${b.dataset.s} を予約しました` : '予約を取り消しました');
+});
+
+// ---------- チャット ----------
+const chat = document.getElementById('chat');
+function bot(html) { chat.insertAdjacentHTML('beforeend', `<div class="msg bot">${html}</div>`); chat.scrollTop = chat.scrollHeight; }
+function me(t) { chat.insertAdjacentHTML('beforeend', `<div class="msg me">${t}</div>`); chat.scrollTop = chat.scrollHeight; }
+function barHTML(v) { return `<div class="mbar"><i style="width:${v}%;background:${LEVEL_COLOR[Math.max(2, level(v))]}"></i></div>`; }
+function answer(q) {
+  const d = NOW.day, h = NOW.h;
+  if (/学食|食堂|ごはん|ランチ|昼/.test(q)) {
+    const a = cur('lt-cafe'), b = cur('b12-cafe');
+    let next = null; for (let t = h; t <= 15; t += 0.25) if (occupancy('lt-cafe', d, t) < 40) { next = t; break; }
+    return `いまのリバティタワー学食は<b>${LEVEL_LABEL[level(a)]}（${a}%）</b>です。${barHTML(a)}<br>12号館カフェテリアは<b>${b}%</b>。${next ? `<br>リバティタワー学食は<b>${fmtTime(Math.round(next * 4) / 4)}ごろ</b>から空く予測です。` : ''}`;
+  }
+  if (/図書館|自習|席/.test(q)) {
+    const a = cur('lib');
+    return `中央図書館は<b>${a}%</b>（${LEVEL_LABEL[level(a)]}）。${barHTML(a)}<br>地下1階 閲覧室に<b>空席 約240席</b>あります。グループ学習室は<b>3室</b>空いています。`;
+  }
+  if (/教室|空き/.test(q)) {
+    return `3限（13:30〜）に空いている教室は<b>38室</b>です。<br>近いところ：<b>リバティタワー 1053・1092・1103</b>`;
+  }
+  if (/練習|部室|サークル/.test(q)) {
+    const a = occupancy('ac-club', d, 18.5);
+    return `今日の18時台のアカデミーコモン練習場は<b>${a}%</b>の予測です。${barHTML(a)}<br>13時・15時の枠はまだ予約できます。`;
+  }
+  if (/エレベーター|エレベータ/.test(q)) {
+    return `リバティタワー1階のエレベーター待ちは<b>約34人</b>。13:10〜13:30は特に混みます。<br>低層階なら<b>階段</b>が早いです。`;
+  }
+  return '学食・図書館・教室・練習場・エレベーターの混雑を答えられます。';
+}
+function ask(q) { me(q); setTimeout(() => bot(answer(q)), 450); }
+const quicks = ['今の学食は混んでる？', '図書館の空席は？', '3限の空き教室は？', '練習場は何時が空いてる？', 'エレベーターは混んでる？'];
+document.getElementById('quick').innerHTML = quicks.map(q => `<button>${q}</button>`).join('');
+document.querySelectorAll('#quick button').forEach(b => b.onclick = () => ask(b.textContent));
+const cin = document.getElementById('cin');
+function send() { if (cin.value.trim()) { ask(cin.value.trim()); cin.value = ''; } }
+document.getElementById('csend').onclick = send;
+cin.onkeydown = e => { if (e.key === 'Enter' && !e.isComposing) send(); };
+bot('こんにちは。キャンパスの混雑状況を案内します。下のボタンから質問してみてください。');
+
+render(); renderList();
+if (params.get('tab')) tab(params.get('tab'));
+window.App = { tab, ask, state, render, map, setSel: id => { state.sel = id; render(); }, setSeg: t => document.querySelector(`#seg button[data-t=${t}]`).click() };
+</script>
+</body>
+</html>
