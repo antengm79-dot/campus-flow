@@ -24,10 +24,18 @@
   .nav button.on { background: #fff; color: var(--blue-700); font-weight: 900; }
   .nav .badge { font-size: 11px; background: var(--cyan-400); color: var(--blue-900); padding: 1px 7px; border-radius: 10px; font-weight: 900; }
   .nav .sep { height: 1px; background: rgba(255,255,255,.18); margin: 10px 4px; }
+  .nav { gap: 1px; }
+  .nav button { padding: 9px 14px; font-size: 14.5px; }
+  .nav .sep-l { font-size: 11px; font-weight: 800; color: rgba(255,255,255,.6); padding: 12px 14px 4px; letter-spacing: .04em; }
+  .nav button.locked { color: rgba(255,255,255,.6); border: 1.5px dashed rgba(255,255,255,.35); margin: 2px 0; }
+  .nav button.locked:hover { color: #fff; border-color: rgba(255,255,255,.7); }
+  .nav button.prep { color: rgba(255,255,255,.85); }
+  .nav .badge.wait { background: #FFE2A8; color: #7A4B00; }
+  .pill.pilot { background: var(--blue-900); color: #fff; border-color: var(--blue-900); }
   .side .foot { margin-top: auto; padding: 16px 22px 0; font-size: 12px; font-weight: 700; opacity: .75; line-height: 1.7; }
 
   /* メイン */
-  main { padding: 22px 28px 28px; overflow: hidden; }
+  main { padding: 22px 28px 28px; overflow: hidden; position: relative; }
   .top { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 18px; }
   .top h1 { font-size: 28px; font-weight: 900; letter-spacing: .01em; }
   .top .sub { font-size: 13px; font-weight: 700; color: var(--ink-3); margin-top: 4px; }
@@ -111,6 +119,72 @@
   .callout { background: var(--sky-50); border: 1.5px solid #BFE4F7; border-radius: 6px; padding: 14px 16px; font-size: 14px; font-weight: 800; line-height: 1.6; }
   .callout b { color: var(--blue-700); font-weight: 900; }
   svg text { font-family: "Noto Sans JP", sans-serif; }
+
+  /* 場所の管理 */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-bottom: 16px; }
+  .step { background: #fff; border: 1px solid var(--line); padding: 12px 18px 12px 26px; position: relative; clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%, 16px 50%); margin-right: -6px; }
+  .step:first-child { clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%); padding-left: 18px; }
+  .step span { display: block; font-size: 11px; font-weight: 800; color: var(--ink-3); }
+  .step b { display: block; font-size: 17px; font-weight: 900; margin-top: 2px; }
+  .step em { font-style: normal; font-size: 12px; font-weight: 800; color: var(--ink-2); }
+  .step.on { background: var(--blue-700); color: #fff; border-color: var(--blue-700); }
+  .step.on span, .step.on em { color: rgba(255,255,255,.85); }
+  .step.next { background: var(--sky-100); }
+  .places { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .place { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; display: flex; flex-direction: column; min-height: 372px; border-top: 6px solid var(--blue-700); }
+  .place .ph { display: flex; justify-content: space-between; align-items: center; }
+  .place h3 { font-size: 24px; font-weight: 900; margin-top: 10px; }
+  .place .pl { font-size: 12.5px; font-weight: 700; color: var(--ink-3); margin-top: 2px; }
+  .pm { display: grid; grid-template-columns: 1fr 1fr 1.3fr; gap: 8px; margin: 14px 0 12px; }
+  .pm div { background: var(--sky-50); border-radius: 6px; padding: 8px 10px; }
+  .pm span { display: block; font-size: 10.5px; font-weight: 800; color: var(--ink-3); }
+  .pm b { font-size: 18px; font-weight: 900; display: block; line-height: 1.3; }
+  .pm b.s { font-size: 12.5px; }
+  .feats li { list-style: none; font-size: 13.5px; font-weight: 800; padding: 5px 0 5px 24px; position: relative; }
+  .feats li::before { content: ""; position: absolute; left: 2px; top: 8px; width: 12px; height: 7px; border-left: 3px solid var(--blue-600); border-bottom: 3px solid var(--blue-600); transform: rotate(-45deg); }
+  .place .go { margin-top: auto; padding: 11px 0; border-radius: 8px; background: var(--blue-700); color: #fff; font-size: 14px; font-weight: 900; }
+  .place.add { border: 2px dashed #B8C8D4; border-top: 6px solid #B8C8D4; background: #FAFCFD; }
+  .place.add h3 { color: var(--ink-2); }
+  .place.add .feats li { color: var(--ink-3); }
+  .place.add .feats li::before { border-color: #B8C8D4; }
+  .place .hint { font-size: 12.5px; font-weight: 800; color: var(--ink-2); background: #fff; border: 1.5px solid var(--line); border-radius: 6px; padding: 8px 10px; margin: 10px 0 12px; line-height: 1.6; }
+  .place .hint b { color: var(--blue-700); }
+  .place.add .go { background: #fff; color: var(--blue-700); border: 2px solid var(--blue-700); }
+  .place.prep { border-top-color: #F0B44C; }
+  .place.prep .go { background: #F3F6F8; color: var(--ink-3); border: 0; cursor: default; }
+  .place.new { align-items: center; justify-content: center; text-align: center; border: 2px dashed #B8C8D4; background: #FAFCFD; cursor: pointer; }
+  .place.new .plus { width: 64px; height: 64px; border-radius: 50%; background: var(--sky-100); color: var(--blue-700); font-size: 40px; font-weight: 700; display: grid; place-items: center; line-height: 1; }
+  .place.new b { font-size: 18px; font-weight: 900; margin-top: 12px; }
+  .place.new small { font-size: 12px; font-weight: 700; color: var(--ink-3); margin-top: 4px; }
+  .btn-add2 { width: 100%; margin-top: 12px; padding: 10px 0; border-radius: 8px; border: 2px dashed var(--blue-500); color: var(--blue-700); font-size: 14px; font-weight: 900; }
+  .modal-bg { position: absolute; inset: 0; background: rgba(11,63,110,.35); display: none; align-items: center; justify-content: center; z-index: 50; }
+  .modal-bg.on { display: flex; }
+  .modal { width: 520px; background: #fff; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,.2); overflow: hidden; }
+  .modal .mh { display: flex; justify-content: space-between; align-items: center; padding: 16px 22px; border-bottom: 1px solid var(--line); font-size: 18px; }
+  .modal .mh button { font-size: 22px; color: var(--ink-3); }
+  .modal .mb { padding: 16px 22px; display: grid; gap: 12px; }
+  .modal label { font-size: 12px; font-weight: 800; color: var(--ink-2); display: grid; gap: 5px; }
+  .modal select { font: inherit; font-size: 14px; font-weight: 800; padding: 9px 10px; border: 1.5px solid var(--line); border-radius: 6px; background: #fff; color: var(--ink); }
+  .lbl2 { font-size: 12px; font-weight: 800; color: var(--ink-2); margin-bottom: -6px; }
+  .radio { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .radio label { border: 1.5px solid var(--line); border-radius: 8px; padding: 9px 10px; font-size: 13px; font-weight: 900; color: var(--ink); display: block; }
+  .radio label.on { border-color: var(--blue-700); background: var(--sky-50); }
+  .radio small { display: block; font-size: 11px; font-weight: 700; color: var(--ink-3); margin-top: 2px; }
+  .checks { display: flex; gap: 6px; flex-wrap: wrap; }
+  .checks span { font-size: 12.5px; font-weight: 800; padding: 6px 10px; border-radius: 6px; background: var(--blue-700); color: #fff; }
+  .m-eff { background: var(--sky-50); border-radius: 8px; padding: 10px 12px; font-size: 13px; font-weight: 800; }
+  .m-eff b { color: var(--blue-700); }
+  .modal .mf { display: flex; justify-content: flex-end; gap: 10px; padding: 14px 22px; border-top: 1px solid var(--line); }
+  .modal .mf button { padding: 10px 22px; border-radius: 8px; font-size: 14px; font-weight: 900; }
+  .modal .b1 { background: var(--blue-700); color: #fff; }
+  .modal .b2 { border: 1.5px solid var(--line); color: var(--ink-2); }
+  .u-toast { position: absolute; left: 50%; bottom: 28px; transform: translate(-50%, 10px); background: var(--ink); color: #fff; padding: 12px 20px; border-radius: 10px; font-size: 14px; font-weight: 800; opacity: 0; transition: .3s; z-index: 60; pointer-events: none; }
+  .u-toast.on { opacity: 1; transform: translate(-50%, 0); }
+  .seats.mini { grid-template-columns: repeat(20, 1fr); gap: 3px; }
+  .seats.mini .seat { aspect-ratio: 1.4; border-width: 1px; }
+  #iso-chips { margin-left: auto; }
+  #iso-chips .chip { padding: 4px 10px; font-size: 12px; }
+  #iso-chips .chip.addc { border-style: dashed; color: var(--blue-700); }
 
   /* 導入効果 */
   .total { display: flex; align-items: center; gap: 22px; background: var(--blue-700); color: #fff; border-radius: var(--radius); padding: 16px 24px; margin-bottom: 16px; }
@@ -217,28 +291,30 @@
     </div>
     <nav class="nav" id="nav">
       <button data-v="overview" class="on">ダッシュボード</button>
-      <button data-v="effects">導入効果</button>
-      <button data-v="weekly">曜日別データ</button>
-      <div class="sep"></div>
+      <button data-v="places">場所の管理 <span class="badge" id="nav-count">2/5</span></button>
+      <div class="sep-l">試験導入中</div>
       <button data-v="cafeteria">学食 <span class="badge">混雑</span></button>
-      <button data-v="classroom">教室・空調</button>
       <button data-v="library">図書館</button>
-      <button data-v="club">部室・練習場</button>
-      <button data-v="elevator">エレベーター</button>
-      <div class="sep"></div>
-      <button data-v="cleaning">清掃員の配置</button>
+      <div class="sep-l">追加できる場所</div>
+      <button data-v="classroom" data-add="classroom" class="locked">＋ 教室・空調</button>
+      <button data-v="club" data-add="club" class="locked">＋ 部室・練習場</button>
+      <button data-v="elevator" data-add="elevator" class="locked">＋ エレベーター</button>
+      <div class="sep-l">分析・レポート</div>
+      <button data-v="weekly">曜日別データ</button>
+      <button data-v="effects">導入効果</button>
       <button data-v="sdgs">SDGs・広報</button>
     </nav>
-    <div class="foot">明治大学<br>駿河台キャンパス<br>AIカメラ 186台 稼働中</div>
+    <div class="foot">明治大学 駿河台キャンパス<br>試験導入：学食・図書館<br>AIカメラ 20台 稼働中</div>
   </aside>
 
   <main>
     <div class="top">
       <div>
         <h1 id="title">ダッシュボード</h1>
-        <div class="sub" id="subtitle">学内の人の流れ・混雑・電力・学食をリアルタイムで把握</div>
+        <div class="sub" id="subtitle">試験導入中の学食・図書館の人の流れと混雑をリアルタイムで把握</div>
       </div>
       <div class="right">
+        <span class="pill pilot">試験導入中：学食・図書館</span>
         <span class="pill live">リアルタイム更新中</span>
         <span class="pill" id="now"></span>
       </div>
@@ -248,11 +324,8 @@
     <section class="view on" id="v-overview">
       <div class="grid" style="grid-template-columns: 1.08fr 1fr; margin-bottom:16px;">
         <div class="card iso-card">
-          <h2>学内「人の流れ」リアルタイムヒートマップ <span class="note">リバティタワー 1階・AIカメラ 24台</span></h2>
-          <div class="iso-stats">
-            <div><span>現在の移動中</span><b class="num" id="flow-now">約2,400名</b></div>
-            <div><span>混雑エリア</span><b class="num">3か所</b></div>
-          </div>
+          <h2>「人の流れ」リアルタイムヒートマップ <span class="chips" id="iso-chips"></span></h2>
+          <div class="iso-stats" id="iso-stats"></div>
           <div class="iso-stage" id="iso-stage">
             <div class="iso" id="iso">
               <canvas id="iso-floor" width="1040" height="680"></canvas>
@@ -262,7 +335,7 @@
             <div id="iso-tags"></div>
           </div>
           <div class="iso-foot">
-            <span>混雑：学食・ロビー・エレベーターホール　／　空いている：自習室・講義室B</span>
+            <span id="iso-foot"></span>
             <span class="heat-legend">空いている<i></i>混雑</span>
           </div>
         </div>
@@ -283,20 +356,6 @@
       </div>
       <div class="grid" style="grid-template-columns: 1fr 1fr 0.78fr;">
         <div class="card">
-          <h2>電力使用量 ＆ 省エネ遠隔制御 <span class="note">ECO</span></h2>
-          <div class="stat3">
-            <div><span>リアルタイム電力</span><b class="num">226.6<small>kW</small></b></div>
-            <div><span>本日の累計</span><b class="num">1,842<small>kWh</small></b></div>
-            <div><span>前日比</span><b class="num" style="color:var(--blue-600)">−8.2<small>%</small></b></div>
-          </div>
-          <ul class="ctl">
-            <li><span class="tag blue">自動OFF</span>空き教室 12室の空調・照明をOFF</li>
-            <li><span class="tag dark">最適化</span>エレベーター 省エネ運転中（6基中2基待機）</li>
-          </ul>
-          <div id="power-line"></div>
-          <div class="line-legend"><span>単位 kW</span><span><i style="background:#006FB8"></i>実績</span><span><i class="dash" style="border-color:#2FCDEA"></i>AI予測</span><span><i style="background:#D6E4EE"></i>導入前</span></div>
-        </div>
-        <div class="card">
           <h2>学食 需要 ＆ フードロス予測 <span class="note">大学生協 連携</span></h2>
           <div class="cafe-big"><span>本日の学食来場予測</span><b class="num">2,140<small>食</small></b><em>現在 1,083食（予測どおり）</em></div>
           <div class="two">
@@ -305,29 +364,50 @@
           </div>
         </div>
         <div class="card">
-          <h2>KPI・システムステータス</h2>
-          <ul class="kpi-list">
-            <li><span>稼働カメラ</span><b>AIカメラ 186 / 186台</b><span class="tag blue">正常</span></li>
-            <li><span>予測AI</span><b>稼働中・精度 94%</b><span class="tag blue">正常</span></li>
-            <li><span>学内滞在者</span><b class="num" id="k-people2">5,358人</b><span class="tag gray">推定</span></li>
+          <h2>図書館 座席の空き状況 <span class="note">中央図書館</span></h2>
+          <div class="cafe-big"><span>いま空いている席</span><b class="num">612<small>/ 1,040席</small></b><em>グループ学習室 3室空き</em></div>
+          <div class="sub-h" style="margin-top:12px;">地下1階 閲覧室 <span>■ 使用中　□ 空き</span></div>
+          <div class="seats mini" id="dash-seats"></div>
+          <div class="live-list" id="dash-floors" style="margin-top:12px;gap:8px;"></div>
+        </div>
+        <div class="card">
+          <h2>試験導入ステータス</h2>
+          <div class="sub-h">導入した場所 <span id="st-count">2 / 5か所</span></div>
+          <div class="bar" style="height:12px;"><i id="st-bar" style="width:40%;background:var(--blue-700)"></i></div>
+          <ul class="kpi-list" style="margin-top:6px;">
+            <li><span>学食</span><b>AIカメラ 8台・食券／モバイル連携</b><span class="tag blue">正常</span></li>
+            <li><span>図書館</span><b>AIカメラ 12台・座席センサー</b><span class="tag blue">正常</span></li>
+            <li><span>予測AI</span><b>精度 94%（過去4週）</b><span class="tag blue">正常</span></li>
           </ul>
-          <div class="kpi-big">
-            <div><span>電力削減額（本日）</span><b class="num">¥34,500</b></div>
-            <div><span>廃棄ロス削減</span><b class="num">−42<small>kg</small></b></div>
+          <div class="kpi-big" style="grid-template-columns:1fr 1fr;">
+            <div><span>廃棄ロス（本日）</span><b class="num">−42<small>kg</small></b></div>
+            <div><span>アプリ利用</span><b class="num">68<small>%</small></b></div>
           </div>
+          <button class="btn-add2" onclick="showView('places')">＋ 場所を追加する</button>
         </div>
       </div>
+    </section>
+
+    <!-- 場所の管理 -->
+    <section class="view" id="v-places">
+      <div class="steps">
+        <div class="step on"><span>STEP 1 ・ 2030年4月〜</span><b>試験導入</b><em>学食・図書館</em></div>
+        <div class="step" id="step2"><span>STEP 2 ・ 2030年10月〜</span><b>教室・部室へ拡大</b><em>空調・照明の自動OFF</em></div>
+        <div class="step"><span>STEP 3 ・ 2031年4月〜</span><b>全館に展開</b><em>エレベーター・清掃</em></div>
+        <div class="step"><span>STEP 4</span><b>他キャンパス・全国へ</b><em>和泉・生田・中野</em></div>
+      </div>
+      <div class="places" id="places"></div>
     </section>
 
     <!-- 導入効果 -->
     <section class="view" id="v-effects">
       <div class="total">
-        <div><div class="lbl">年間のコスト削減効果（試算）</div><div class="big2 num">¥17,530,000<small>/ 年</small></div></div>
+        <div><div class="lbl">年間のコスト削減効果（試算）　試験導入 ¥4.2M → 全館に展開すると</div><div class="big2 num">¥17,530,000<small>/ 年</small></div></div>
         <div class="bd"><span>学食 人件費<b>¥4.2M</b></span><span>照明・空調<b>¥8.6M</b></span><span>清掃 人件費<b>¥3.8M</b></span><span>エレベーター電力<b>¥0.93M</b></span></div>
       </div>
       <div class="grid effs">
         <div class="card eff">
-          <div><div class="no">01 学食</div><h3>混雑予測と人気メニュー把握</h3>
+          <div><span class="tag dark" style="float:right">試験導入中</span><div class="no">01 学食</div><h3>混雑予測と人気メニュー把握</h3>
             <ul class="acts2"><li>学食の曜日・時間帯の混雑予測</li><li>学食の人気メニュー把握</li></ul>
             <div class="arrow">↓</div>
             <div class="res"><div><span>フードロス削減</span><b class="num">−32<small>%</small></b></div><div><span>人件費削減</span><b class="num">−14<small>%</small></b></div></div></div>
@@ -335,14 +415,14 @@
             <div class="mini-h" style="margin-top:10px;">今週の人気メニュー</div><div class="menu3"><span><b>1</b>日替わり定食</span><span><b>2</b>カレー</span><span><b>3</b>ラーメン</span></div></div>
         </div>
         <div class="card eff">
-          <div><div class="no">02 エレベーター</div><h3>エレベーターの効率稼働</h3>
+          <div><span class="tag gray" style="float:right">場所を追加すると</span><div class="no">02 エレベーター</div><h3>エレベーターの効率稼働</h3>
             <ul class="acts2"><li>各階の待ち人数から運転を最適化</li><li>空運転・停止回数を削減</li></ul>
             <div class="arrow">↓</div>
             <div class="res"><div><span>電力削減</span><b class="num">−21<small>%</small></b></div><div><span>年間削減電力</span><b class="num">31,000<small>kWh</small></b></div></div></div>
           <div><div class="mini-h">1日の電力使用量 <span>kWh・リバティタワー</span></div><div id="eff-elv"></div></div>
         </div>
         <div class="card eff">
-          <div><div class="no">03 教室・清掃</div><h3>曜日・時間別の空き教室予測</h3>
+          <div><span class="tag gray" style="float:right">場所を追加すると</span><div class="no">03 教室・清掃</div><h3>曜日・時間別の空き教室予測</h3>
             <ul class="acts2"><li>曜日・時限ごとに空き教室を予測</li><li>空き教室の照明・空調を自動OFF</li></ul>
             <div class="arrow">↓</div>
             <div class="res"><div><span>電気代（照明・空調）</span><b class="num">−18<small>%</small></b></div><div><span>清掃員の効率配置・人件費</span><b class="num">−24<small>%</small></b></div></div></div>
@@ -350,7 +430,7 @@
             <div class="muted" style="margin-top:8px;">空き教室は自動で消灯・空調OFF。使われた教室だけを清掃。</div></div>
         </div>
         <div class="card eff">
-          <div><div class="no">04 広報・ブランディング</div><h3>選ばれる大学へ</h3>
+          <div><span class="tag dark" style="float:right">試験導入中</span><div class="no">04 広報・ブランディング</div><h3>選ばれる大学へ</h3>
             <ul class="acts2"><li>SDGsの取り組みをアピール</li><li>オープンキャンパスでアプリ体験</li><li>学生満足度の向上</li></ul>
             <div class="arrow">↓</div>
             <div class="res"><div><span>入学者増加（志願者数）</span><b class="num">+6<small>%目標</small></b></div></div></div>
@@ -362,12 +442,6 @@
 
     <!-- 曜日別データ -->
     <section class="view" id="v-weekly">
-      <div class="grid kpis">
-        <div class="card kpi"><div class="label">現在の学内滞在者数</div><div class="val num" id="k-people">0<small>人</small></div><div class="delta">先週同時刻比 +4%</div></div>
-        <div class="card kpi c2"><div class="label">今月の電力使用量</div><div class="val num">−18<small>%</small></div><div class="delta">空調・照明の自動OFF 1,284回</div></div>
-        <div class="card kpi c3"><div class="label">学食のフードロス</div><div class="val num">−32<small>%</small></div><div class="delta">廃棄 1日平均 41kg → 28kg</div></div>
-        <div class="card kpi c4"><div class="label">エレベーター運転回数</div><div class="val num">−21<small>%</small></div><div class="delta">平均待ち時間 2分40秒 → 1分15秒</div></div>
-      </div>
       <div class="grid" style="grid-template-columns: 1.75fr 1fr; margin-bottom:16px;">
         <div class="card">
           <h2>施設別 × 曜日別 混雑ヒートマップ <span class="note">過去8週間の平均（%）</span></h2>
@@ -382,20 +456,16 @@
           <div class="live-list" id="live"></div>
         </div>
       </div>
-      <div class="grid" style="grid-template-columns: 1.2fr 1fr 1fr;">
+      <div class="grid" style="grid-template-columns: 1fr 1fr;">
         <div class="card">
-          <h2>電力使用量（週間） <span class="note">kWh・導入前との比較</span></h2>
-          <div id="power"></div>
-        </div>
-        <div class="card">
-          <h2>自動制御ログ <span class="note">本日</span></h2>
+          <h2>今日の記録 <span class="note">学食・図書館</span></h2>
           <ul class="log" id="log"></ul>
         </div>
         <div class="card">
-          <h2>今日の注意ポイント</h2>
-          <div class="callout" style="margin-bottom:10px;">12:30〜13:10 <b>リバティタワー学食</b>が満席見込み。12号館カフェテリアへの分散を学生アプリで案内中。</div>
-          <div class="callout" style="margin-bottom:10px;">3限 空き教室 <b>38室</b>。空調・照明を自動OFF済み。</div>
-          <div class="callout">18時台 <b>アカデミーコモン</b>練習場の利用が集中。予約枠を2枠追加推奨。</div>
+          <h2>データからの気づき</h2>
+          <div class="callout" style="margin-bottom:10px;">毎週 <b>火・木の12時台</b>は学食が満席。学生アプリで12号館カフェテリアへの分散を案内。</div>
+          <div class="callout" style="margin-bottom:10px;">図書館は <b>14〜17時</b>がピーク。グループ学習室の予約枠を夕方に追加推奨。</div>
+          <div class="callout">土曜の学食は来客 <b>4割</b>。仕込み量とスタッフを平日の半分に。</div>
         </div>
       </div>
     </section>
@@ -613,6 +683,23 @@
         </div>
       </div>
     </section>
+    <div class="modal-bg" id="modal">
+      <div class="modal">
+        <div class="mh"><b>場所を追加</b><button onclick="closeAdd()">×</button></div>
+        <div class="mb">
+          <label>場所の種類<select id="m-type"></select></label>
+          <label>建物・フロア<select id="m-bld"></select></label>
+          <div class="lbl2">使用するカメラ</div>
+          <div class="radio"><label class="on"><input type="radio" name="cam" checked> 既存の防犯カメラを活用<small>おすすめ・追加費用をおさえる</small></label><label><input type="radio" name="cam"> 新しくAIカメラを設置<small>属性分析センサー</small></label></div>
+          <div class="lbl2">使う機能</div>
+          <div class="checks" id="m-feats"></div>
+          <label>開始予定<select><option>2030年10月（後期から）</option><option>2031年4月</option></select></label>
+          <div class="m-eff" id="m-eff"></div>
+        </div>
+        <div class="mf"><button class="b2" onclick="closeAdd()">キャンセル</button><button class="b1" id="m-ok">追加する</button></div>
+      </div>
+    </div>
+    <div class="u-toast" id="u-toast"></div>
   </main>
 </div>
 
@@ -623,7 +710,8 @@ const { DAYS, HOURS, FACILITIES, occupancy, level, LEVEL_LABEL, LEVEL_COLOR, mat
 document.getElementById('now').textContent = NOW.label;
 
 const TITLES = {
-  overview: ['ダッシュボード', '学内の人の流れ・混雑・電力・学食をリアルタイムで把握'],
+  overview: ['ダッシュボード', '試験導入中の学食・図書館の人の流れと混雑をリアルタイムで把握'],
+  places: ['場所の管理', '導入する場所を選んで、あとから追加できます（段階導入）'],
   effects: ['導入効果', 'データ活用で「コスト削減」と「選ばれる大学」を同時に実現（年間・試算）'],
   sdgs: ['SDGs・広報', 'SDGsの取り組みと学生満足度を発信し、入学者増加につなげる'],
   weekly: ['曜日別データ', '施設ごと・曜日ごとの混雑データ（過去8週の平均）'],
@@ -643,7 +731,10 @@ function show(v) {
   history.replaceState(null, '', '?v=' + v);
   if (v === 'overview' && window.placeTags) requestAnimationFrame(window.placeTags);
 }
-document.querySelectorAll('#nav button').forEach(b => b.onclick = () => show(b.dataset.v));
+document.querySelectorAll('#nav button').forEach(b => b.onclick = () => {
+  if (b.classList.contains('locked')) { show('places'); openAdd(b.dataset.add); return; }
+  show(b.dataset.v);
+});
 window.showView = show;
 
 // 凡例
@@ -665,7 +756,7 @@ function heatHTML(fid, opts = {}) {
   });
   return html;
 }
-const heatFacs = FACILITIES.filter(f => ['lt-cafe', 'lt-class', 'lib', 'ac-club'].includes(f.id));
+const heatFacs = FACILITIES.filter(f => ['lt-cafe', 'b12-cafe', 'lib'].includes(f.id));
 const chipsEl = document.getElementById('heat-chips');
 function selectHeat(id) {
   chipsEl.querySelectorAll('.chip').forEach(c => c.classList.toggle('on', c.dataset.id === id));
@@ -673,38 +764,32 @@ function selectHeat(id) {
 }
 heatFacs.forEach(f => {
   const b = document.createElement('button');
-  b.className = 'chip'; b.dataset.id = f.id; b.textContent = f.typeName;
+  b.className = 'chip'; b.dataset.id = f.id; b.textContent = f.place === f.name ? f.name : f.place + ' ' + f.typeName;
   b.onclick = () => selectHeat(f.id);
   chipsEl.appendChild(b);
 });
 selectHeat('lt-cafe');
 window.selectHeat = selectHeat;
+chipsEl.insertAdjacentHTML('beforeend', '<button class="chip" style="border-style:dashed;color:#8A8686" onclick="showView(\'places\')">＋ 教室など（未導入）</button>');
 
 // リアルタイム
 let total = 0;
-document.getElementById('live').innerHTML = FACILITIES.map(f => {
+document.getElementById('live').innerHTML = FACILITIES.filter(f => f.type === 'cafeteria' || f.type === 'library').map(f => {
   const v = occupancy(f, NOW.day, NOW.h);
   total += Math.round(f.cap * v / 100);
   return `<div class="row"><div class="nm">${f.place} ${f.name === f.place ? '' : f.name}<small>${f.typeName}・定員 ${f.cap.toLocaleString()}</small></div>
     <div class="bar"><i style="width:${v}%;background:${LEVEL_COLOR[Math.max(2, level(v))]}"></i></div><div class="pct num">${v}%</div></div>`;
 }).join('');
-document.getElementById('k-people').innerHTML = (total + 3120).toLocaleString() + '<small>人</small>';
+document.getElementById('live').insertAdjacentHTML('beforeend', '<div class="callout" style="border-style:dashed;text-align:center;color:#8A8686;background:#fff">＋ 教室・部室を追加すると、ここに表示されます</div>');
 
 // 電力
-document.getElementById('power').innerHTML = Charts.groupedBars({
-  labels: DAYS, series: [
-    { name: '導入前', color: '#BFE4F7', values: [4120, 4260, 4080, 4190, 3950, 2010] },
-    { name: '導入後', color: '#006FB8', values: [3380, 3460, 3360, 3420, 3210, 1530] },
-  ], width: 520, height: 210, unit: 'kWh'
-});
-
 // ログ
 const logs = [
-  ['12:38', 'リバティタワー 1103教室 無人20分', '<span class="tag alert">通知</span>'],
-  ['12:31', '1092教室 空調・照明 自動OFF', '<span class="tag blue">自動OFF</span>'],
-  ['12:20', '学食 行列 45人 → 学生へ分散案内', '<span class="tag dark">配信</span>'],
-  ['11:58', '14号館 練習室B 無人 空調OFF', '<span class="tag blue">自動OFF</span>'],
-  ['11:40', 'エレベーター 1・2号機 1階待機へ', '<span class="tag gray">最適化</span>'],
+  ['12:38', '学食 行列18人 → 学生アプリで分散案内', '<span class="tag dark">配信</span>'],
+  ['12:20', '日替わり定食 追加調理 +85食を提案', '<span class="tag blue">提案</span>'],
+  ['12:05', '図書館 グループ学習室 A・B 予約で満室', '<span class="tag gray">予約</span>'],
+  ['11:50', '学食 13:45から空き始めると予測', '<span class="tag blue">予測</span>'],
+  ['11:30', '図書館 地下1階 空席240席を案内', '<span class="tag gray">案内</span>'],
 ];
 document.getElementById('log').innerHTML = logs.map(l => `<li><span class="t num">${l[0]}</span><span>${l[1]}</span>${l[2]}</li>`).join('');
 
@@ -812,63 +897,96 @@ function freeLv(n) { return n < 40 ? 0 : n < 70 ? 1 : n < 100 ? 2 : n < 140 ? 3 
 
 // ===== ダッシュボード =====
 (function () {
-  // 間取り（平面座標 520×340）
-  const ROOMS = [
-    { n: '学食', r: [0, 0, 220, 170], f: '#E8EEF3' },
-    { n: 'ロビー', r: [220, 0, 140, 340], f: '#F1F5F8' },
-    { n: 'EVホール', r: [360, 0, 160, 90], f: '#E8EEF3' },
-    { n: '講義室A', r: [360, 90, 160, 125], f: '#EDF2F6' },
-    { n: '講義室B', r: [360, 215, 160, 125], f: '#EDF2F6' },
-    { n: '購買', r: [0, 170, 110, 80], f: '#EDF2F6' },
-    { n: '相談室', r: [110, 170, 110, 80], f: '#EDF2F6' },
-    { n: '自習室', r: [0, 250, 220, 90], f: '#EDF2F6' },
-  ];
-  const WALLS = [
-    [0, 0, 520, 0], [520, 0, 520, 340], [0, 0, 0, 340], [0, 340, 255, 340], [325, 340, 520, 340],
-    [220, 0, 220, 60], [220, 120, 220, 170], [0, 170, 220, 170], [110, 170, 110, 250], [0, 250, 220, 250],
-    [220, 170, 220, 190], [220, 230, 220, 270], [220, 300, 220, 340],
-    [360, 0, 360, 15], [360, 75, 360, 110], [360, 150, 360, 240], [360, 280, 360, 340],
-    [360, 90, 520, 90], [360, 215, 520, 215],
-  ];
   const iso = document.getElementById('iso');
-  WALLS.forEach(([x1, y1, x2, y2]) => {
-    const len = Math.hypot(x2 - x1, y2 - y1), ang = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
-    const w = document.createElement('div');
-    w.className = 'wall' + (x1 === x2 ? ' v' : '');
-    w.style.cssText = `left:${x1}px;top:${y1}px;width:${len}px;transform:rotateZ(${ang}deg) rotateX(90deg);`;
-    iso.appendChild(w);
-  });
-
-  // 床
   const fc = document.getElementById('iso-floor').getContext('2d');
   fc.scale(2, 2);
-  fc.fillStyle = '#F4F7FA'; fc.fillRect(0, 0, 520, 340);
-  ROOMS.forEach(rm => {
-    const [x, y, w, h] = rm.r;
-    fc.fillStyle = rm.f; fc.fillRect(x, y, w, h);
-  });
-  // 学食のテーブル
-  fc.fillStyle = '#D3DDE5';
-  for (let i = 0; i < 4; i++) for (let j = 0; j < 3; j++) fc.fillRect(22 + i * 48, 22 + j * 46, 28, 18);
-  // 自習室の机
-  for (let i = 0; i < 6; i++) fc.fillRect(14 + i * 34, 300, 24, 26);
-  // 講義室の机列
-  for (let k = 0; k < 2; k++) for (let i = 0; i < 4; i++) fc.fillRect(380, 108 + k * 125 + i * 24, 120, 8);
-  // エレベーター
-  fc.fillStyle = '#7F93A3';
-  for (let i = 0; i < 3; i++) fc.fillRect(484, 12 + i * 25, 26, 18);
-  document.fonts.ready.then(() => {
-  fc.fillStyle = '#4A4545'; fc.font = '900 13px "Noto Sans JP"'; fc.textAlign = 'center';
-  ROOMS.forEach(rm => { const [x, y, w, h] = rm.r; if (rm.n !== '講義室A' && rm.n !== '講義室B') fc.fillText(rm.n, x + w / 2, y + h / 2 + 4); else fc.fillText(rm.n, x + w / 2, y + 22); });
-  });
+  const PLANS = {
+    cafe: {
+      label: '学食（リバティタワー）',
+      stats: [['いま店内', '463人'], ['受取の行列', '18人']],
+      foot: '混雑：受取カウンター・中央の客席　／　空いている：窓側の席',
+      rooms: [{ n: '客席ホール', r: [0, 0, 370, 340], f: '#EEF3F6' }, { n: '厨房', r: [370, 0, 150, 150], f: '#E1E8EE' }, { n: '券売機・受取', r: [370, 150, 150, 100], f: '#E9EFF4' }, { n: '入口', r: [370, 250, 150, 90], f: '#F3F6F9' }],
+      walls: [[0, 0, 520, 0], [520, 0, 520, 340], [0, 0, 0, 340], [0, 340, 430, 340], [490, 340, 520, 340], [370, 0, 370, 30], [370, 130, 370, 150], [370, 150, 520, 150], [370, 150, 370, 170], [370, 320, 370, 340], [450, 250, 520, 250]],
+      furn: fc => {
+        fc.fillStyle = '#D3DDE5';
+        for (let i = 0; i < 6; i++) for (let j = 0; j < 5; j++) fc.fillRect(18 + i * 56, 22 + j * 62, 36, 22);
+        fc.fillStyle = '#B7C6D2'; fc.fillRect(380, 20, 120, 16); fc.fillRect(380, 60, 50, 60); fc.fillRect(450, 60, 50, 60);
+        fc.fillStyle = '#7F93A3'; for (let i = 0; i < 6; i++) fc.fillRect(382 + i * 22, 160, 14, 14);
+        fc.fillStyle = '#9FB1BF'; fc.fillRect(372, 40, 8, 80);
+      },
+      hot: [[330, 80, 1], [345, 120, .9], [300, 60, .85], [240, 90, .9], [180, 120, .95], [120, 90, .8], [200, 200, .85], [260, 230, .8], [140, 230, .7], [60, 60, .45], [40, 290, .3], [100, 300, .35], [400, 200, .9], [450, 195, .75], [460, 300, .55]],
+      flows: ['M460,336 L460,205 L410,205', 'M395,190 L355,95', 'M340,80 L210,110 L130,170'],
+      tags: [[340, 70, '受取カウンター 行列18人', 'hot'], [190, 150, '客席 89%', 'hot'], [440, 185, '券売機 待ち6人', ''], [50, 300, '窓側の席 42%', 'cool']],
+    },
+    lib: {
+      label: '図書館（中央図書館 地下1階）',
+      stats: [['いま在館', '486人'], ['空いている席', '612席']],
+      foot: '混雑：グループ学習室A・B・閲覧席の中央　／　空いている：書架の奥・学習室C',
+      rooms: [{ n: '閲覧席', r: [0, 0, 300, 240], f: '#EEF3F6' }, { n: '書架', r: [300, 0, 220, 200], f: '#E9EFF4' }, { n: '学習室A', r: [0, 240, 100, 100], f: '#E6EDF2' }, { n: '学習室B', r: [100, 240, 100, 100], f: '#E6EDF2' }, { n: '学習室C', r: [200, 240, 100, 100], f: '#E6EDF2' }, { n: '入口・カウンター', r: [300, 200, 220, 140], f: '#F3F6F9' }],
+      walls: [[0, 0, 520, 0], [520, 0, 520, 340], [0, 0, 0, 340], [0, 340, 400, 340], [460, 340, 520, 340], [0, 240, 30, 240], [70, 240, 130, 240], [170, 240, 230, 240], [270, 240, 300, 240], [100, 240, 100, 340], [200, 240, 200, 340], [300, 0, 300, 60], [300, 180, 300, 230], [300, 300, 300, 340], [300, 200, 330, 200], [450, 200, 520, 200]],
+      furn: fc => {
+        fc.fillStyle = '#D3DDE5';
+        for (let j = 0; j < 5; j++) { fc.fillRect(20, 22 + j * 42, 120, 14); fc.fillRect(160, 22 + j * 42, 120, 14); }
+        fc.fillStyle = '#B7C6D2'; for (let i = 0; i < 8; i++) fc.fillRect(318 + i * 24, 20, 10, 160);
+        fc.fillStyle = '#D3DDE5'; for (let k = 0; k < 3; k++) fc.fillRect(25 + k * 100, 270, 50, 40);
+        fc.fillStyle = '#9FB1BF'; fc.fillRect(340, 260, 90, 18); fc.fillStyle = '#7F93A3'; fc.fillRect(400, 318, 8, 18); fc.fillRect(452, 318, 8, 18);
+      },
+      hot: [[80, 60, .75], [220, 70, .7], [150, 120, .85], [90, 160, .65], [230, 180, .7], [40, 200, .4], [50, 290, 1], [150, 290, .95], [250, 290, .1], [360, 80, .25], [440, 140, .15], [380, 270, .6], [430, 320, .7]],
+      flows: ['M430,336 L430,215 L310,120 L200,120', 'M430,215 L350,215 L350,90', 'M180,150 L60,225 L50,280'],
+      tags: [[150, 110, '閲覧席 空き41席', ''], [50, 290, '学習室A 使用中', 'hot'], [150, 290, '学習室B 使用中', 'hot'], [250, 290, '学習室C 空き', 'cool'], [420, 110, '書架 12人', 'cool']],
+    },
+  };
+  let plan = PLANS.cafe;
+  const tagsEl = document.getElementById('iso-tags');
+  function placeTags() {
+    const st = document.getElementById('iso-stage').getBoundingClientRect();
+    if (!st.width) return;
+    tagsEl.innerHTML = '';
+    plan.tags.forEach(([x, y, t, c]) => {
+      const m = document.createElement('i'); m.style.cssText = `position:absolute;left:${x}px;top:${y}px;width:1px;height:1px;`;
+      iso.appendChild(m); const r = m.getBoundingClientRect(); m.remove();
+      const el = document.createElement('div'); el.className = 'itag ' + c; el.textContent = t;
+      el.style.left = (r.left - st.left) + 'px'; el.style.top = (r.top - st.top - 14) + 'px';
+      tagsEl.appendChild(el);
+    });
+  }
+  window.placeTags = placeTags;
+  function drawFloor() {
+    fc.clearRect(0, 0, 520, 340);
+    fc.fillStyle = '#F4F7FA'; fc.fillRect(0, 0, 520, 340);
+    plan.rooms.forEach(rm => { const [x, y, w, h] = rm.r; fc.fillStyle = rm.f; fc.fillRect(x, y, w, h); });
+    plan.furn(fc);
+    fc.fillStyle = '#4A4545'; fc.font = '900 13px "Noto Sans JP"'; fc.textAlign = 'center';
+    plan.rooms.forEach(rm => { const [x, y, w, h] = rm.r; fc.fillText(rm.n, x + w / 2, y + (h > 150 ? h - 14 : h / 2 + 4)); });
+  }
+  function setPlan(k) {
+    plan = PLANS[k];
+    iso.querySelectorAll('.wall').forEach(w => w.remove());
+    plan.walls.forEach(([x1, y1, x2, y2]) => {
+      const len = Math.hypot(x2 - x1, y2 - y1), ang = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+      const w = document.createElement('div');
+      w.className = 'wall' + (x1 === x2 ? ' v' : '');
+      w.style.cssText = `left:${x1}px;top:${y1}px;width:${len}px;transform:rotateZ(${ang}deg) rotateX(90deg);`;
+      iso.appendChild(w);
+    });
+    drawFloor(); document.fonts.ready.then(drawFloor);
+    let svg = `<defs><marker id="ah" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0B3F6E"/></marker></defs>`;
+    plan.flows.forEach((d, i) => {
+      svg += `<path d="${d}" fill="none" stroke="#0B3F6E" stroke-width="3" stroke-linejoin="round" stroke-dasharray="7 5" marker-end="url(#ah)" opacity=".85"><animate attributeName="stroke-dashoffset" from="24" to="0" dur="1s" repeatCount="indefinite"/></path>`;
+      for (let k = 0; k < 3; k++) svg += `<circle r="4" fill="#fff" stroke="#0B3F6E" stroke-width="2"><animateMotion dur="${4 + i}s" begin="${-k * (4 + i) / 3}s" repeatCount="indefinite" path="${d}"/></circle>`;
+    });
+    document.getElementById('iso-flow').innerHTML = svg;
+    document.getElementById('iso-stats').innerHTML = `<div><span>${plan.label}</span></div>` + plan.stats.map(([a, b]) => `<div><span>${a}</span><b class="num">${b}</b></div>`).join('');
+    document.getElementById('iso-foot').textContent = plan.foot;
+    document.querySelectorAll('#iso-chips .chip').forEach(c => c.classList.toggle('on', c.dataset.k === k));
+    drawHeat(performance.now());
+    requestAnimationFrame(placeTags);
+  }
+  document.getElementById('iso-chips').innerHTML = '<button class="chip" data-k="cafe">学食</button><button class="chip" data-k="lib">図書館</button><button class="chip addc">＋ 追加</button>';
+  document.querySelectorAll('#iso-chips .chip').forEach(c => c.onclick = () => c.dataset.k ? setPlan(c.dataset.k) : showView('places'));
+  window.setPlan = setPlan;
 
   // ヒート
-  const HOT = [
-    [60, 50, 1], [115, 70, 1], [160, 40, .9], [90, 125, .95], [175, 115, .85], [40, 120, .75], [200, 80, .8],
-    [235, 90, .9], [285, 60, .6], [295, 160, .7], [285, 245, .55], [290, 318, .75],
-    [400, 45, 1], [445, 50, .85], [380, 30, .7],
-    [430, 160, .25], [450, 290, .12], [55, 210, .6], [165, 205, .15], [60, 300, .2], [160, 295, .18],
-  ];
   const hc = document.getElementById('iso-heat'), hx = hc.getContext('2d');
   const tmp = document.createElement('canvas'); tmp.width = 520; tmp.height = 340; const tx = tmp.getContext('2d');
   const STOPS = [[0, [217, 243, 252, 0]], [.15, [217, 243, 252, 150]], [.35, [117, 214, 255, 190]], [.55, [47, 205, 234, 210]], [.75, [18, 143, 201, 225]], [1, [11, 63, 110, 235]]];
@@ -880,7 +998,7 @@ function freeLv(n) { return n < 40 ? 0 : n < 70 ? 1 : n < 100 ? 2 : n < 140 ? 3 
   }
   function drawHeat(tm) {
     tx.clearRect(0, 0, 520, 340);
-    HOT.forEach(([x, y, v], i) => {
+    plan.hot.forEach(([x, y, v], i) => {
       const vv = Math.max(.05, Math.min(1, v + Math.sin(tm / 900 + i * 1.7) * 0.08));
       const r = 34 + vv * 22;
       const g = tx.createRadialGradient(x, y, 0, x, y, r);
@@ -892,69 +1010,27 @@ function freeLv(n) { return n < 40 ? 0 : n < 70 ? 1 : n < 100 ? 2 : n < 140 ? 3 
     tx.putImageData(img, 0, 0);
     hx.clearRect(0, 0, 1040, 680); hx.imageSmoothingEnabled = true; hx.drawImage(tmp, 0, 0, 1040, 680);
   }
-  drawHeat(0);
   setInterval(() => drawHeat(performance.now()), 600);
-
-  // 人の流れ（矢印）
-  const flows = [
-    'M290,336 L290,200 L290,90 L228,90 L150,90',
-    'M290,200 L330,120 L330,45 L420,45',
-    'M290,290 L222,285 L120,295',
-  ];
-  let svg = `<defs><marker id="ah" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0B3F6E"/></marker></defs>`;
-  flows.forEach((d, i) => {
-    svg += `<path d="${d}" fill="none" stroke="#0B3F6E" stroke-width="3" stroke-linejoin="round" stroke-dasharray="7 5" marker-end="url(#ah)" opacity=".85"><animate attributeName="stroke-dashoffset" from="24" to="0" dur="1s" repeatCount="indefinite"/></path>`;
-    for (let k = 0; k < 3; k++) svg += `<circle r="4" fill="#fff" stroke="#0B3F6E" stroke-width="2"><animateMotion dur="${4 + i}s" begin="${-k * (4 + i) / 3}s" repeatCount="indefinite" path="${d}"/></circle>`;
-  });
-  document.getElementById('iso-flow').innerHTML = svg;
-
-  // 立体の上に浮かぶラベル
-  const TAGS = [[110, 80, '学食 89%', 'hot'], [290, 130, 'ロビー 64%', ''], [420, 40, 'EVホール 34人待ち', 'hot'], [110, 300, '自習室 9%', 'cool'], [440, 290, '講義室B 12%', 'cool']];
-  const tagsEl = document.getElementById('iso-tags');
-  function placeTags() {
-    const st = document.getElementById('iso-stage').getBoundingClientRect();
-    if (!st.width) return;
-    tagsEl.innerHTML = '';
-    TAGS.forEach(([x, y, t, c]) => {
-      const m = document.createElement('i'); m.style.cssText = `position:absolute;left:${x}px;top:${y}px;width:1px;height:1px;`;
-      iso.appendChild(m); const r = m.getBoundingClientRect(); m.remove();
-      const el = document.createElement('div'); el.className = 'itag ' + c; el.textContent = t;
-      el.style.left = (r.left - st.left) + 'px'; el.style.top = (r.top - st.top - 14) + 'px';
-      tagsEl.appendChild(el);
-    });
-  }
-  window.placeTags = placeTags;
-  requestAnimationFrame(placeTags); window.addEventListener('resize', placeTags);
+  setPlan('cafe');
+  window.addEventListener('resize', placeTags);
 
   // エリア別
-  const spots = [['学食', 'Cafeteria', 'lt-cafe', '#0B3F6E'], ['図書館', 'Library', 'lib', '#128FC9'], ['講義室', 'Classroom', 'lt-class', '#2FCDEA'], ['自習室', 'Study', 'study', '#2FCDEA']];
-  document.getElementById('spots').innerHTML = spots.map(([n, e, id]) => {
-    const v = id === 'study' ? 9 : occupancy(id, NOW.day, NOW.h), lv = level(v);
+  const spots = [['学食', 'リバティタワー', 'lt-cafe', '#0B3F6E'], ['カフェテリア', '12号館', 'b12-cafe', '#5BBDE8'], ['図書館', '閲覧席', 'lib', '#128FC9'], ['学習室', '図書館', 'study', '#2FCDEA']];
+  document.getElementById('spots').innerHTML = spots.slice(0, 3).map(([n, e, id]) => {
+    const v = id === 'study' ? 75 : occupancy(id, NOW.day, NOW.h), lv = level(v);
     return `<div class="spot"><div><b>${n}</b><small>${e}</small></div><span class="pillv" style="background:${LEVEL_COLOR[lv]};color:${lv >= 3 ? '#fff' : '#0B3F6E'}">${v}% ${['空き', 'やや空き', '普通', 'やや混雑', '混雑'][lv]}</span></div>`;
-  }).join('');
+  }).join('') + '<div class="spot" style="border-style:dashed;justify-content:center;color:#8A8686;font-size:12.5px;font-weight:800;cursor:pointer" onclick="showView(\'places\')">＋ 教室・部室を追加</div>';
   const xsA = [], xsP = [];
   for (let h = 8; h <= NOW.h + 0.01; h += 0.25) xsA.push(h);
   for (let h = Math.floor(NOW.h * 4) / 4; h <= 20; h += 0.25) xsP.push(h);
   const ser = [];
-  const occ = (id, h) => id === 'study' ? Math.round(6 + 30 * Math.exp(-((h - 15.5) ** 2) / 8) + 6 * Math.exp(-((h - 10) ** 2) / 2)) : occupancy(id, NOW.day, h);
-  [spots[0], spots[1], spots[3]].forEach(([n, , id, col]) => {
+  const occ = (id, h) => id === 'study' ? Math.round(12 + 70 * Math.exp(-((h - 14.5) ** 2) / 7)) : occupancy(id, NOW.day, h);
+  [spots[0], spots[2], spots[3]].forEach(([n, , id, col]) => {
     ser.push({ xs: xsA, values: xsA.map(h => occ(id, h)), color: col, width: 3, dot: true, fill: id === 'lt-cafe' ? '#0B3F6E' : null, fillOpacity: .08 });
     ser.push({ xs: xsP, values: xsP.map(h => Math.max(2, Math.round(occ(id, h) * 0.96 + 2))), color: col, width: 2.5, dash: true });
   });
   document.getElementById('area-line').innerHTML = Charts.line({ xs: xsA, series: ser, xmin: 8, xmax: 20, ymax: 100, width: 470, height: 280, nowX: NOW.h, unit: '%', xticks: [8, 10, 12, 14, 16, 18, 20], xfmt: h => h + '時' });
-  document.getElementById('area-legend').innerHTML = [spots[0], spots[1], spots[3]].map(([n, , , c]) => `<span><i style="background:${c}"></i>${n}</span>`).join('') + '<span><i class="dash" style="border-color:#8A8686"></i>AI予測</span>';
-
-  // 電力
-  const hrs = []; for (let h = 0; h <= 23; h++) hrs.push(h);
-  const kw = h => Math.round(85 + 230 * Math.exp(-((h - 11.5) ** 2) / 6) + 150 * Math.exp(-((h - 16.5) ** 2) / 4) + 40 * Math.exp(-((h - 19) ** 2) / 2));
-  const actH = hrs.filter(h => h <= 12);
-  document.getElementById('power-line').innerHTML = Charts.line({
-    xs: hrs, series: [
-      { values: hrs.map(h => Math.round(kw(h) * 1.18)), color: '#D6E4EE', width: 2.5 },
-      { values: hrs.map(h => Math.round(kw(h) * 1.03)), color: '#2FCDEA', width: 2.5, dash: true },
-      { xs: actH, values: actH.map(h => kw(h) + Math.round((CF.hash('kw' + h) - .5) * 24)), color: '#006FB8', width: 3, dot: true },
-    ], xmin: 0, xmax: 23, ymax: 500, width: 470, height: 170, nowX: NOW.h, unit: '', xticks: [0, 3, 6, 9, 12, 15, 18, 21], xfmt: h => h + '時'
-  });
+  document.getElementById('area-legend').innerHTML = [spots[0], spots[2], spots[3]].map(([n, , , c]) => `<span><i style="background:${c}"></i>${n}</span>`).join('') + '<span><i class="dash" style="border-color:#8A8686"></i>AI予測</span>';
 
   // 学食
   const xo = [], xoA = [];
@@ -973,7 +1049,13 @@ function freeLv(n) { return n < 40 ? 0 : n < 70 ? 1 : n < 100 ? 2 : n < 140 ? 3 
     labels: ['3月', '4/1週', '4/2週', '4/3週'], values: [4.8, 3.6, 2.9, 2.3], colors: ['#BFE4F7', '#5BBDE8', '#128FC9', '#006FB8'],
     ymax: 6, unit: '%', target: 3, targetLabel: '目標 3%以下', width: 300, height: 236
   });
-  document.getElementById('k-people2').textContent = document.getElementById('k-people').textContent.replace('人', '') + '人';
+  let sh = '';
+  for (let r = 0; r < 5; r++) for (let c = 0; c < 20; c++) {
+    if (c === 9 || c === 10) { sh += '<div class="seat gap"></div>'; continue; }
+    sh += `<div class="seat ${CF.hash('d' + r + '-' + c) < (c < 9 ? 0.62 : 0.3) ? 'used' : ''}"></div>`;
+  }
+  document.getElementById('dash-seats').innerHTML = sh;
+  document.getElementById('dash-floors').innerHTML = [['地下1階 閲覧室', 48], ['1階 ラーニングコモンズ', 81], ['グループ学習室', 75]].map(f => `<div class="row" style="grid-template-columns:1fr 90px 40px"><div class="nm" style="font-size:13px">${f[0]}</div><div class="bar"><i style="width:${f[1]}%;background:${LEVEL_COLOR[Math.max(2, level(f[1]))]}"></i></div><div class="pct num" style="font-size:14px">${f[1]}%</div></div>`).join('');
 })();
 
 // ===== 導入効果・SDGs =====
@@ -997,6 +1079,59 @@ function freeLv(n) { return n < 40 ? 0 : n < 70 ? 1 : n < 100 ? 2 : n < 140 ? 3 
   document.getElementById('sat-line').innerHTML = Charts.bars({ labels: ['2029前期', '2029後期', '2030前期（導入）', '2030後期', '2031前期（予測）'], values: [3.3, 3.4, 3.8, 4.1, 4.3], colors: ['#BFE4F7', '#BFE4F7', '#5BBDE8', '#006FB8', '#0B3F6E'], ymax: 5, width: 560, height: 280 });
   document.getElementById('app-bars').innerHTML = Charts.bars({ labels: ['2028', '2029', '2030', '2031(目標)', '2032(目標)'], values: [10420, 10180, 10650, 11290, 11800], colors: ['#BFE4F7', '#BFE4F7', '#128FC9', '#006FB8', '#0B3F6E'], ymax: 14000, width: 560, height: 200, unit: '人' });
 })();
+
+// ===== 場所の管理 =====
+const PLACES = [
+  { id: 'cafeteria', nm: '学食', pl: 'リバティタワー・12号館', st: 'on', since: '2030年4月〜', pm: [['いまの混雑', '89%'], ['AIカメラ', '8台'], ['連携', '食券・モバイル', 's']], feats: ['混雑・来場数の予測', '仕込み量・人気メニュー', 'フードロス・人件費の削減'] },
+  { id: 'library', nm: '図書館', pl: '中央図書館', st: 'on', since: '2030年4月〜', pm: [['空席', '612席'], ['AIカメラ', '12台'], ['連携', '学習室の予約', 's']], feats: ['机の空きを座席マップで表示', 'グループ学習室の予約', '時間帯ごとの混雑予測'] },
+  { id: 'classroom', nm: '教室・空調', pl: 'リバティタワー 186室', st: 'add', step: 'STEP 2 候補', feats: ['在室人数の把握', '空き教室の空調・照明を自動OFF', '消し忘れ通知・清掃員の配置'], hint: '見込み効果 <b>電気代 −18%</b>・<b>清掃 −24%</b><br>既存の防犯カメラ 64台を活用できます', bld: ['リバティタワー 10〜12階', 'リバティタワー 全フロア', 'グローバルフロント'] },
+  { id: 'club', nm: '部室・練習場', pl: 'アカデミーコモン・14号館', st: 'add', step: 'STEP 2 候補', feats: ['利用状況の把握', '無人時の空調を自動OFF', '練習場の予約'], hint: '見込み効果 <b>空調の電気代 −15%</b><br>予約の空き枠を学生アプリに表示', bld: ['アカデミーコモン 地下1階', '14号館 3階'] },
+  { id: 'elevator', nm: 'エレベーター', pl: 'リバティタワー 6基', st: 'add', step: 'STEP 3 候補', feats: ['各階の待ち人数を把握', '運転の最適化', '待ち時間の短縮'], hint: '見込み効果 <b>電力 −21%</b>・<b>待ち時間 半分</b><br>各階のホールにカメラを設置', bld: ['リバティタワー 全6基'] },
+];
+const PLACE_VIEW = { classroom: 'classroom', club: 'club', elevator: 'elevator', cafeteria: 'cafeteria', library: 'library' };
+function renderPlaces() {
+  document.getElementById('places').innerHTML = PLACES.map(p => {
+    if (p.st === 'on') return `<div class="place"><div class="ph"><span class="tag dark">導入中</span><span class="muted">${p.since}</span></div><h3>${p.nm}</h3><div class="pl">${p.pl}</div>
+      <div class="pm">${p.pm.map(([a, b, c]) => `<div><span>${a}</span><b class="${c ? 's' : 'num'}">${b}</b></div>`).join('')}</div>
+      <ul class="feats">${p.feats.map(f => `<li>${f}</li>`).join('')}</ul><button class="go" onclick="showView('${p.id}')">管理画面を開く →</button></div>`;
+    if (p.st === 'prep') return `<div class="place prep"><div class="ph"><span class="tag warn">準備中</span><span class="muted">2030年10月 開始予定</span></div><h3>${p.nm}</h3><div class="pl">${p.pl}</div>
+      <ul class="feats" style="margin-top:14px">${p.feats.map(f => `<li>${f}</li>`).join('')}</ul><div class="hint">${p.hint}</div><button class="go">カメラ設置の準備中</button></div>`;
+    return `<div class="place add"><div class="ph"><span class="tag gray">追加できます</span><span class="muted">${p.step}</span></div><h3>＋ ${p.nm}</h3><div class="pl">${p.pl}</div>
+      <ul class="feats" style="margin-top:14px">${p.feats.map(f => `<li>${f}</li>`).join('')}</ul><div class="hint">${p.hint}</div><button class="go" onclick="openAdd('${p.id}')">＋ この場所を追加する</button></div>`;
+  }).join('') + `<div class="place new" onclick="openAdd('classroom')"><div class="plus">＋</div><b>新しい場所を追加</b><small>ラウンジ・ホール・バス停など<br>カメラがある場所なら追加できます</small></div>`;
+  const n = PLACES.filter(p => p.st !== 'add').length;
+  document.getElementById('nav-count').textContent = n + '/5';
+  const sc = document.getElementById('st-count'); if (sc) sc.textContent = n + ' / 5か所';
+  const sb = document.getElementById('st-bar'); if (sb) sb.style.width = (n * 20) + '%';
+  document.getElementById('step2').classList.toggle('next', PLACES.some(p => p.st === 'prep'));
+}
+let addTarget = null;
+function openAdd(id) {
+  const p = PLACES.find(x => x.id === id && x.st === 'add') || PLACES.find(x => x.st === 'add');
+  if (!p) return;
+  addTarget = p;
+  document.getElementById('m-type').innerHTML = PLACES.filter(x => x.st === 'add').map(x => `<option value="${x.id}" ${x === p ? 'selected' : ''}>${x.nm}</option>`).join('');
+  fillModal();
+  document.getElementById('modal').classList.add('on');
+}
+function fillModal() {
+  const p = addTarget;
+  document.getElementById('m-bld').innerHTML = p.bld.map(b => `<option>${b}</option>`).join('');
+  document.getElementById('m-feats').innerHTML = p.feats.map(f => `<span>✓ ${f}</span>`).join('');
+  document.getElementById('m-eff').innerHTML = p.hint;
+}
+document.getElementById('m-type').onchange = e => { addTarget = PLACES.find(x => x.id === e.target.value); fillModal(); };
+function closeAdd() { document.getElementById('modal').classList.remove('on'); }
+document.getElementById('m-ok').onclick = () => {
+  const p = addTarget; p.st = 'prep'; closeAdd(); renderPlaces();
+  const nb = document.querySelector(`#nav button[data-add="${p.id}"]`);
+  if (nb) { nb.classList.remove('locked'); nb.classList.add('prep'); nb.innerHTML = `${p.nm} <span class="badge wait">準備中</span>`; }
+  const t = document.getElementById('u-toast'); t.textContent = `「${p.nm}」を追加しました（2030年10月 開始予定）`; t.classList.add('on');
+  setTimeout(() => t.classList.remove('on'), 2600);
+};
+document.querySelectorAll('.radio label').forEach(l => l.onclick = () => document.querySelectorAll('.radio label').forEach(x => x.classList.toggle('on', x === l)));
+window.openAdd = openAdd; window.closeAdd = closeAdd;
+renderPlaces();
 
 const qv = new URLSearchParams(location.search).get('v');
 if (qv && TITLES[qv]) show(qv);
