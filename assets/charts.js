@@ -17,9 +17,11 @@
       s += `<text x="${x(t)}" y="${H - 8}" text-anchor="middle" font-size="11" font-weight="700" fill="${AX}">${o.xfmt ? o.xfmt(t) : t}</text>`;
     });
     o.series.forEach(se => {
-      const pts = se.values.map((v, i) => `${x(o.xs[i]).toFixed(1)},${y(v).toFixed(1)}`);
-      if (se.fill) s += `<polygon points="${x(o.xs[0])},${y(0)} ${pts.join(' ')} ${x(o.xs[se.values.length - 1])},${y(0)}" fill="${se.fill}"/>`;
-      s += `<polyline points="${pts.join(' ')}" fill="none" stroke="${se.color}" stroke-width="${se.width || 2}" stroke-linejoin="round" stroke-linecap="round" ${se.dash ? 'stroke-dasharray="6 6"' : ''}/>`;
+      const sx = se.xs || o.xs;
+      const pts = se.values.map((v, i) => `${x(sx[i]).toFixed(1)},${y(v).toFixed(1)}`);
+      if (se.fill) s += `<polygon points="${x(sx[0])},${y(0)} ${pts.join(' ')} ${x(sx[se.values.length - 1])},${y(0)}" fill="${se.fill}" ${se.fillOpacity ? `fill-opacity="${se.fillOpacity}"` : ''}/>`;
+      s += `<polyline points="${pts.join(' ')}" fill="none" stroke="${se.color}" stroke-width="${se.width || 2}" stroke-linejoin="round" stroke-linecap="round" ${se.dash ? 'stroke-dasharray="6 5"' : ''}/>`;
+      if (se.dot) { const l = pts[pts.length - 1].split(','); s += `<circle cx="${l[0]}" cy="${l[1]}" r="4.5" fill="#fff" stroke="${se.color}" stroke-width="3"/>`; }
     });
     if (o.nowX != null) {
       s += `<line x1="${x(o.nowX)}" x2="${x(o.nowX)}" y1="${T}" y2="${H - B}" stroke="#211716" stroke-width="2"/>`;
@@ -75,5 +77,33 @@
     return s + '</svg>';
   }
 
-  window.Charts = { line, bars, groupedBars };
+  // 棒＋目標線（＋任意の折れ線）
+  function combo(o) {
+    const W = o.width, H = o.height, L = 36, R = 8, T = 14, B = 26;
+    const ymax = o.ymax;
+    const n = o.values.length, bw = (W - L - R) / n;
+    const y = v => T + (1 - v / ymax) * (H - T - B);
+    let s = `<svg viewBox="0 0 ${W} ${H}" width="100%" style="display:block">`;
+    for (let i = 0; i <= 4; i++) {
+      const v = ymax * i / 4;
+      s += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="${GRID}"/>`;
+      s += `<text x="${L - 6}" y="${y(v) + 4}" text-anchor="end" font-size="10.5" font-weight="700" fill="${AX}">${v}${o.unit || ''}</text>`;
+    }
+    const pts = [];
+    o.values.forEach((v, i) => {
+      const cx = L + bw * i + bw / 2, w = bw * 0.5;
+      s += `<rect x="${cx - w / 2}" y="${y(v)}" width="${w}" height="${y(0) - y(v)}" rx="2" fill="${o.colors[i]}"/>`;
+      s += `<text x="${cx}" y="${H - 8}" text-anchor="middle" font-size="10.5" font-weight="800" fill="#4A4545">${o.labels[i]}</text>`;
+      pts.push(`${cx},${y(v)}`);
+    });
+    s += `<polyline points="${pts.join(' ')}" fill="none" stroke="#0B3F6E" stroke-width="2.5" stroke-linejoin="round"/>`;
+    pts.forEach(p => { const [a, b] = p.split(','); s += `<circle cx="${a}" cy="${b}" r="3.5" fill="#0B3F6E"/>`; });
+    if (o.target != null) {
+      s += `<line x1="${L}" x2="${W - R}" y1="${y(o.target)}" y2="${y(o.target)}" stroke="#D64545" stroke-width="1.8" stroke-dasharray="5 4"/>`;
+      s += `<text x="${W - R}" y="${y(o.target) - 5}" text-anchor="end" font-size="10.5" font-weight="800" fill="#D64545">${o.targetLabel || ''}</text>`;
+    }
+    return s + '</svg>';
+  }
+
+  window.Charts = { line, bars, groupedBars, combo };
 })();

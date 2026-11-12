@@ -111,6 +111,101 @@
   .callout { background: var(--sky-50); border: 1.5px solid #BFE4F7; border-radius: 6px; padding: 14px 16px; font-size: 14px; font-weight: 800; line-height: 1.6; }
   .callout b { color: var(--blue-700); font-weight: 900; }
   svg text { font-family: "Noto Sans JP", sans-serif; }
+
+  /* 導入効果 */
+  .total { display: flex; align-items: center; gap: 22px; background: var(--blue-700); color: #fff; border-radius: var(--radius); padding: 16px 24px; margin-bottom: 16px; }
+  .total .lbl { font-size: 14px; font-weight: 800; opacity: .85; }
+  .total .big2 { font-size: 40px; line-height: 1; }
+  .total .big2 small { font-size: 18px; margin-left: 4px; font-family: "Noto Sans JP"; font-weight: 900; }
+  .total .bd { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+  .total .bd span { background: rgba(255,255,255,.14); border-radius: 6px; padding: 6px 12px; font-size: 13px; font-weight: 800; }
+  .total .bd b { font-family: "Inter", sans-serif; font-weight: 800; margin-left: 6px; }
+  .effs { grid-template-columns: 1fr 1fr; }
+  .eff { display: grid; grid-template-columns: 1fr 1.05fr; gap: 18px; padding: 16px 20px; }
+  .eff .no { font-family: "Inter"; font-weight: 800; font-size: 13px; color: var(--blue-600); }
+  .eff h3 { font-size: 18px; font-weight: 900; margin: 2px 0 10px; }
+  .acts2 li { list-style: none; font-size: 13.5px; font-weight: 800; padding: 6px 10px; background: var(--sky-50); border: 1.5px solid #CFEAF8; border-radius: 6px; margin-bottom: 6px; }
+  .arrow { text-align: center; color: var(--blue-500); font-size: 20px; font-weight: 900; line-height: 1; margin: 2px 0 6px; }
+  .res { border-top: 3px solid var(--blue-700); padding-top: 8px; display: grid; gap: 6px; }
+  .res div { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .res span { font-size: 13px; font-weight: 900; }
+  .res b { font-size: 24px; color: var(--blue-900); white-space: nowrap; }
+  .res b small { font-size: 12px; font-family: "Noto Sans JP"; font-weight: 800; color: var(--ink-2); margin-left: 2px; }
+  .mini-h { font-size: 12px; font-weight: 900; color: var(--ink-2); margin-bottom: 6px; display: flex; justify-content: space-between; }
+  .mini-h span { color: var(--ink-3); font-weight: 700; }
+  .mheat { display: grid; gap: 2px; }
+  .mheat div { height: 17px; border-radius: 2px; font-size: 9.5px; font-weight: 800; display: grid; place-items: center; color: var(--blue-900); }
+  .mheat .l { background: none; color: var(--ink-3); }
+  .mheat .lv3, .mheat .lv4 { color: #fff; }
+  .menu3 { display: flex; gap: 5px; margin-top: 8px; flex-wrap: wrap; }
+  .menu3 span { font-size: 11.5px; font-weight: 800; border: 1.5px solid var(--line); border-radius: 5px; padding: 3px 7px; }
+  .menu3 span b { color: var(--blue-700); margin-right: 3px; }
+  .sdg { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .sdg span { font-size: 11.5px; font-weight: 900; color: #fff; background: var(--blue-600); border-radius: 5px; padding: 4px 8px; }
+  .sdg span:nth-child(2) { background: var(--blue-700); }
+  .sdg span:nth-child(3) { background: var(--blue-900); }
+  /* ランキング */
+  .rank2 li { list-style: none; display: grid; grid-template-columns: 22px 1fr 110px 52px; gap: 8px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 13.5px; font-weight: 800; }
+  .rank2 .n { font-family: "Inter"; font-weight: 800; color: var(--blue-700); }
+  .rank2 .r { text-align: right; }
+  .up { color: var(--blue-600); font-size: 11px; font-weight: 900; }
+  .down { color: var(--ink-3); font-size: 11px; font-weight: 900; }
+  .rpt { border: 1.5px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .rpt .rh { background: var(--blue-700); color: #fff; padding: 12px 16px; font-size: 16px; font-weight: 900; }
+  .rpt .rh small { display: block; font-size: 11px; font-weight: 700; opacity: .85; }
+  .rpt .rb { padding: 12px 16px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .rpt .rb div { background: var(--sky-50); border-radius: 6px; padding: 10px; }
+  .rpt .rb span { display: block; font-size: 11px; font-weight: 900; color: var(--blue-700); }
+  .rpt .rb b { font-size: 22px; display: block; margin-top: 2px; }
+  .rpt .rb em { font-style: normal; font-size: 11px; font-weight: 700; color: var(--ink-3); }
+
+  /* ダッシュボード */
+  .iso-card { position: relative; }
+  .iso-stats { position: absolute; left: 20px; top: 54px; z-index: 3; display: flex; flex-direction: column; gap: 6px; }
+  .iso-stats div { font-size: 12px; font-weight: 800; color: var(--ink-2); }
+  .iso-stats b { display: block; font-size: 22px; color: var(--ink); line-height: 1.15; }
+  .iso-stage { position: relative; height: 322px; overflow: visible; }
+  .iso { position: absolute; left: 50%; top: 50%; width: 520px; height: 340px; margin: -170px 0 0 -260px; transform-style: preserve-3d; transform: translate(40px, -6px) scale(.86) rotateX(54deg) rotateZ(-34deg); }
+  .iso canvas, .iso svg { position: absolute; inset: 0; width: 520px; height: 340px; }
+  .wall { position: absolute; height: 22px; transform-origin: 0 0; background: linear-gradient(#FFFFFF, #E7EDF2); border: 1px solid #AFC0CD; box-sizing: border-box; }
+  .wall.v { background: linear-gradient(#F6F9FB, #D9E3EA); }
+  #iso-tags { position: absolute; inset: 0; pointer-events: none; }
+  .itag { position: absolute; transform: translate(-50%, -100%); background: #fff; border: 2px solid var(--blue-900); border-radius: 6px; padding: 3px 8px; font-size: 12px; font-weight: 900; white-space: nowrap; box-shadow: 0 2px 6px rgba(0,0,0,.12); }
+  .itag::after { content: ""; position: absolute; left: 50%; bottom: -7px; width: 2px; height: 7px; background: var(--blue-900); }
+  .itag.hot { background: var(--blue-900); color: #fff; }
+  .itag.cool { border-color: var(--blue-500); color: var(--blue-700); }
+  .itag.cool::after { background: var(--blue-500); }
+  .iso-foot { display: flex; justify-content: space-between; align-items: center; font-size: 12px; font-weight: 800; color: var(--ink-2); margin-top: 6px; }
+  .heat-legend { display: flex; align-items: center; gap: 6px; }
+  .heat-legend i { width: 90px; height: 10px; border-radius: 3px; background: linear-gradient(90deg, #D9F3FC, #75D6FF, #2FCDEA, #128FC9, #0B3F6E); }
+
+  .area-grid { display: grid; grid-template-columns: 172px 1fr; gap: 16px; }
+  .sub-h { font-size: 12px; font-weight: 900; color: var(--ink-2); margin-bottom: 8px; display: flex; justify-content: space-between; gap: 8px; }
+  .sub-h span { color: var(--ink-3); font-weight: 700; }
+  .spots { display: flex; flex-direction: column; gap: 8px; }
+  .spot { border: 1.5px solid var(--line); border-radius: 8px; padding: 9px 10px; display: flex; justify-content: space-between; align-items: center; }
+  .spot b { font-size: 14px; font-weight: 900; display: block; }
+  .spot small { font-size: 10.5px; font-weight: 700; color: var(--ink-3); }
+  .pillv { font-size: 12px; font-weight: 900; padding: 4px 9px; border-radius: 14px; white-space: nowrap; }
+  .line-legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 11.5px; font-weight: 800; color: var(--ink-2); margin-top: 6px; }
+  .line-legend i { display: inline-block; width: 16px; height: 4px; border-radius: 2px; vertical-align: middle; margin-right: 5px; }
+  .line-legend i.dash { height: 0; border-top: 3px dashed; border-radius: 0; background: none; }
+
+  .stat3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .stat3 span, .cafe-big span, .kpi-big span { display: block; font-size: 11.5px; font-weight: 800; color: var(--ink-3); }
+  .stat3 b { font-size: 26px; line-height: 1.2; }
+  .stat3 small, .cafe-big small, .kpi-big small { font-size: 13px; margin-left: 2px; font-family: "Noto Sans JP"; font-weight: 800; color: var(--ink-2); }
+  .ctl { margin: 10px 0 4px; background: var(--sky-50); border-radius: 6px; padding: 4px 10px; }
+  .ctl li { list-style: none; font-size: 12px; font-weight: 800; padding: 5px 0; display: flex; gap: 8px; align-items: center; }
+  .cafe-big b { font-size: 34px; line-height: 1.15; }
+  .cafe-big em { font-style: normal; font-size: 12px; font-weight: 800; color: var(--blue-700); margin-left: 10px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 12px; }
+  .kpi-list li { list-style: none; display: grid; grid-template-columns: 72px 1fr auto; gap: 8px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 13px; }
+  .kpi-list li > span:first-child { font-size: 11.5px; font-weight: 800; color: var(--ink-3); }
+  .kpi-list b { font-weight: 900; }
+  .kpi-big { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 14px; }
+  .kpi-big > div { background: var(--sky-50); border-radius: 8px; padding: 10px 14px; border-left: 5px solid var(--blue-600); }
+  .kpi-big b { font-size: 30px; line-height: 1.2; color: var(--blue-900); }
 </style>
 </head>
 <body>
@@ -121,7 +216,9 @@
       <small>大学管理者ダッシュボード</small>
     </div>
     <nav class="nav" id="nav">
-      <button data-v="overview" class="on">全体サマリー</button>
+      <button data-v="overview" class="on">ダッシュボード</button>
+      <button data-v="effects">導入効果</button>
+      <button data-v="weekly">曜日別データ</button>
       <div class="sep"></div>
       <button data-v="cafeteria">学食 <span class="badge">混雑</span></button>
       <button data-v="classroom">教室・空調</button>
@@ -129,7 +226,8 @@
       <button data-v="club">部室・練習場</button>
       <button data-v="elevator">エレベーター</button>
       <div class="sep"></div>
-      <button data-v="cleaning">清掃ルート提案</button>
+      <button data-v="cleaning">清掃員の配置</button>
+      <button data-v="sdgs">SDGs・広報</button>
     </nav>
     <div class="foot">明治大学<br>駿河台キャンパス<br>AIカメラ 186台 稼働中</div>
   </aside>
@@ -137,8 +235,8 @@
   <main>
     <div class="top">
       <div>
-        <h1 id="title">全体サマリー</h1>
-        <div class="sub" id="subtitle">キャンパス全体の人の流れと、施設ごとの曜日別混雑データ</div>
+        <h1 id="title">ダッシュボード</h1>
+        <div class="sub" id="subtitle">学内の人の流れ・混雑・電力・学食をリアルタイムで把握</div>
       </div>
       <div class="right">
         <span class="pill live">リアルタイム更新中</span>
@@ -146,8 +244,124 @@
       </div>
     </div>
 
-    <!-- 全体サマリー -->
+    <!-- 全体サマリー（ダッシュボード） -->
     <section class="view on" id="v-overview">
+      <div class="grid" style="grid-template-columns: 1.08fr 1fr; margin-bottom:16px;">
+        <div class="card iso-card">
+          <h2>学内「人の流れ」リアルタイムヒートマップ <span class="note">リバティタワー 1階・AIカメラ 24台</span></h2>
+          <div class="iso-stats">
+            <div><span>現在の移動中</span><b class="num" id="flow-now">約2,400名</b></div>
+            <div><span>混雑エリア</span><b class="num">3か所</b></div>
+          </div>
+          <div class="iso-stage" id="iso-stage">
+            <div class="iso" id="iso">
+              <canvas id="iso-floor" width="1040" height="680"></canvas>
+              <canvas id="iso-heat" width="1040" height="680"></canvas>
+              <svg id="iso-flow" viewBox="0 0 520 340"></svg>
+            </div>
+            <div id="iso-tags"></div>
+          </div>
+          <div class="iso-foot">
+            <span>混雑：学食・ロビー・エレベーターホール　／　空いている：自習室・講義室B</span>
+            <span class="heat-legend">空いている<i></i>混雑</span>
+          </div>
+        </div>
+        <div class="card">
+          <h2>エリア別 混雑状況 <span class="note">カメラ解析 ＋ AI予測</span></h2>
+          <div class="area-grid">
+            <div>
+              <div class="sub-h">各スポット <span>混雑率</span></div>
+              <div class="spots" id="spots"></div>
+            </div>
+            <div>
+              <div class="sub-h">混雑の推移 <span>実線＝実績 / 点線＝AI予測</span></div>
+              <div id="area-line"></div>
+              <div class="line-legend" id="area-legend"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid" style="grid-template-columns: 1fr 1fr 0.78fr;">
+        <div class="card">
+          <h2>電力使用量 ＆ 省エネ遠隔制御 <span class="note">ECO</span></h2>
+          <div class="stat3">
+            <div><span>リアルタイム電力</span><b class="num">226.6<small>kW</small></b></div>
+            <div><span>本日の累計</span><b class="num">1,842<small>kWh</small></b></div>
+            <div><span>前日比</span><b class="num" style="color:var(--blue-600)">−8.2<small>%</small></b></div>
+          </div>
+          <ul class="ctl">
+            <li><span class="tag blue">自動OFF</span>空き教室 12室の空調・照明をOFF</li>
+            <li><span class="tag dark">最適化</span>エレベーター 省エネ運転中（6基中2基待機）</li>
+          </ul>
+          <div id="power-line"></div>
+          <div class="line-legend"><span>単位 kW</span><span><i style="background:#006FB8"></i>実績</span><span><i class="dash" style="border-color:#2FCDEA"></i>AI予測</span><span><i style="background:#D6E4EE"></i>導入前</span></div>
+        </div>
+        <div class="card">
+          <h2>学食 需要 ＆ フードロス予測 <span class="note">大学生協 連携</span></h2>
+          <div class="cafe-big"><span>本日の学食来場予測</span><b class="num">2,140<small>食</small></b><em>現在 1,083食（予測どおり）</em></div>
+          <div class="two">
+            <div><div class="sub-h">食券・モバイルオーダーの累計</div><div id="order-area"></div></div>
+            <div><div class="sub-h">食材の廃棄率（週）</div><div id="loss-combo"></div></div>
+          </div>
+        </div>
+        <div class="card">
+          <h2>KPI・システムステータス</h2>
+          <ul class="kpi-list">
+            <li><span>稼働カメラ</span><b>AIカメラ 186 / 186台</b><span class="tag blue">正常</span></li>
+            <li><span>予測AI</span><b>稼働中・精度 94%</b><span class="tag blue">正常</span></li>
+            <li><span>学内滞在者</span><b class="num" id="k-people2">5,358人</b><span class="tag gray">推定</span></li>
+          </ul>
+          <div class="kpi-big">
+            <div><span>電力削減額（本日）</span><b class="num">¥34,500</b></div>
+            <div><span>廃棄ロス削減</span><b class="num">−42<small>kg</small></b></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 導入効果 -->
+    <section class="view" id="v-effects">
+      <div class="total">
+        <div><div class="lbl">年間のコスト削減効果（試算）</div><div class="big2 num">¥17,530,000<small>/ 年</small></div></div>
+        <div class="bd"><span>学食 人件費<b>¥4.2M</b></span><span>照明・空調<b>¥8.6M</b></span><span>清掃 人件費<b>¥3.8M</b></span><span>エレベーター電力<b>¥0.93M</b></span></div>
+      </div>
+      <div class="grid effs">
+        <div class="card eff">
+          <div><div class="no">01 学食</div><h3>混雑予測と人気メニュー把握</h3>
+            <ul class="acts2"><li>学食の曜日・時間帯の混雑予測</li><li>学食の人気メニュー把握</li></ul>
+            <div class="arrow">↓</div>
+            <div class="res"><div><span>フードロス削減</span><b class="num">−32<small>%</small></b></div><div><span>人件費削減</span><b class="num">−14<small>%</small></b></div></div></div>
+          <div><div class="mini-h">曜日×時間帯の混雑予測 <span>学食</span></div><div class="mheat" id="eff-cafe"></div>
+            <div class="mini-h" style="margin-top:10px;">今週の人気メニュー</div><div class="menu3"><span><b>1</b>日替わり定食</span><span><b>2</b>カレー</span><span><b>3</b>ラーメン</span></div></div>
+        </div>
+        <div class="card eff">
+          <div><div class="no">02 エレベーター</div><h3>エレベーターの効率稼働</h3>
+            <ul class="acts2"><li>各階の待ち人数から運転を最適化</li><li>空運転・停止回数を削減</li></ul>
+            <div class="arrow">↓</div>
+            <div class="res"><div><span>電力削減</span><b class="num">−21<small>%</small></b></div><div><span>年間削減電力</span><b class="num">31,000<small>kWh</small></b></div></div></div>
+          <div><div class="mini-h">1日の電力使用量 <span>kWh・リバティタワー</span></div><div id="eff-elv"></div></div>
+        </div>
+        <div class="card eff">
+          <div><div class="no">03 教室・清掃</div><h3>曜日・時間別の空き教室予測</h3>
+            <ul class="acts2"><li>曜日・時限ごとに空き教室を予測</li><li>空き教室の照明・空調を自動OFF</li></ul>
+            <div class="arrow">↓</div>
+            <div class="res"><div><span>電気代（照明・空調）</span><b class="num">−18<small>%</small></b></div><div><span>清掃員の効率配置・人件費</span><b class="num">−24<small>%</small></b></div></div></div>
+          <div><div class="mini-h">空き教室の予測 <span>室数（全186室）</span></div><div class="mheat" id="eff-room"></div>
+            <div class="muted" style="margin-top:8px;">空き教室は自動で消灯・空調OFF。使われた教室だけを清掃。</div></div>
+        </div>
+        <div class="card eff">
+          <div><div class="no">04 広報・ブランディング</div><h3>選ばれる大学へ</h3>
+            <ul class="acts2"><li>SDGsの取り組みをアピール</li><li>オープンキャンパスでアプリ体験</li><li>学生満足度の向上</li></ul>
+            <div class="arrow">↓</div>
+            <div class="res"><div><span>入学者増加（志願者数）</span><b class="num">+6<small>%目標</small></b></div></div></div>
+          <div><div class="mini-h">学生満足度（5段階） <span>学期ごとの調査</span></div><div id="eff-sat"></div>
+            <div class="sdg"><span>SDG 7 エネルギー</span><span>SDG 12 つくる責任</span><span>SDG 13 気候変動</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 曜日別データ -->
+    <section class="view" id="v-weekly">
       <div class="grid kpis">
         <div class="card kpi"><div class="label">現在の学内滞在者数</div><div class="val num" id="k-people">0<small>人</small></div><div class="delta">先週同時刻比 +4%</div></div>
         <div class="card kpi c2"><div class="label">今月の電力使用量</div><div class="val num">−18<small>%</small></div><div class="delta">空調・照明の自動OFF 1,284回</div></div>
@@ -214,14 +428,28 @@
           <div class="muted" style="margin-top:10px;">食券・モバイルオーダーの販売データ＋カメラの行列人数から算出</div>
         </div>
       </div>
-      <div class="grid" style="grid-template-columns: 1fr 1fr;">
+      <div class="grid" style="grid-template-columns: 1.25fr 1fr 1fr;">
         <div class="card">
-          <h2>フードロス（廃棄量）の推移 <span class="note">kg / 週</span></h2>
-          <div id="loss"></div>
+          <h2>曜日 × 時間帯の混雑予測 <span class="note">来週・%</span></h2>
+          <div class="heat" id="cafe-heat" style="grid-template-columns: 26px repeat(11,1fr);"></div>
         </div>
         <div class="card">
-          <h2>曜日別 ランチ混雑（12〜13時） <span class="note">%</span></h2>
-          <div id="cafe-week"></div>
+          <h2>人気メニュー ランキング <span class="note">今週・食数</span></h2>
+          <ul class="rank2" id="menu-rank"></ul>
+          <div class="muted" style="margin-top:8px;">金曜はカレーが +32%。曜日ごとに仕込みを調整。</div>
+        </div>
+        <div class="card">
+          <h2>スタッフ配置の提案 <span class="note">明日・人</span></h2>
+          <table>
+            <thead><tr><th>時間帯</th><th class="r">現在</th><th class="r">提案</th></tr></thead>
+            <tbody>
+              <tr><td>10:00〜11:30</td><td class="r num">6</td><td class="r"><span class="tag blue">4</span></td></tr>
+              <tr><td>11:30〜13:30</td><td class="r num">10</td><td class="r"><span class="tag dark">12</span></td></tr>
+              <tr><td>13:30〜17:00</td><td class="r num">6</td><td class="r"><span class="tag blue">3</span></td></tr>
+              <tr><td>17:00〜19:30</td><td class="r num">6</td><td class="r"><span class="tag blue">5</span></td></tr>
+            </tbody>
+          </table>
+          <div class="callout" style="margin-top:10px;padding:10px 12px;">人件費 <b>−14%</b>（年間 約 ¥4.2M）</div>
         </div>
       </div>
     </section>
@@ -234,23 +462,21 @@
         <div class="card kpi c3"><div class="label">本日の削減電力</div><div class="val num">412<small>kWh</small></div><div class="delta">約 ¥12,400 相当</div></div>
         <div class="card kpi c4"><div class="label">消し忘れ通知</div><div class="val num">9<small>件</small></div><div class="delta">管理者へプッシュ通知</div></div>
       </div>
-      <div class="grid" style="grid-template-columns: 1.6fr 1fr;">
+      <div class="grid" style="grid-template-columns: 1.25fr 1fr;">
         <div class="card">
           <h2>教室ごとの在室状況と空調 <span class="note">リバティタワー 10〜12階</span></h2>
           <table id="rooms"></table>
         </div>
-        <div class="card">
-          <h2>自動制御ルール</h2>
-          <table>
-            <tbody id="rules"></tbody>
-          </table>
-          <h2 style="margin-top:20px;">通知</h2>
-          <ul class="log">
-            <li><span class="t">12:38</span><span>1103教室 無人20分・空調ON</span><span class="tag alert">要確認</span></li>
-            <li><span class="t">12:31</span><span>1092教室 2限終了・無人を検知</span><span class="tag blue">自動OFF</span></li>
-            <li><span class="t">12:30</span><span>11階 東側 照明一括OFF</span><span class="tag blue">自動OFF</span></li>
-            <li><span class="t">12:05</span><span>1201教室 3限前 予冷開始</span><span class="tag gray">予約運転</span></li>
-          </ul>
+        <div>
+          <div class="card" style="margin-bottom:16px;">
+            <h2>曜日・時限別 空き教室の予測 <span class="note">空き室数 / 186室</span></h2>
+            <div class="heat" id="room-pred" style="grid-template-columns: 26px repeat(6,1fr);"></div>
+            <div class="muted" style="margin-top:8px;">濃いほど空き教室が多い → 照明・空調を自動OFF、清掃は使用後の教室だけ</div>
+          </div>
+          <div class="card">
+            <h2>自動制御ルール</h2>
+            <table><tbody id="rules"></tbody></table>
+          </div>
         </div>
       </div>
     </section>
@@ -298,7 +524,7 @@
         <div class="card kpi"><div class="label">現在の待ち人数（合計）</div><div class="val num">74<small>人</small></div><div class="delta">リバティタワー 全フロア</div></div>
         <div class="card kpi c2"><div class="label">平均待ち時間</div><div class="val num">1:15<small>分</small></div><div class="delta">導入前 2:40</div></div>
         <div class="card kpi c3"><div class="label">本日の運転回数</div><div class="val num">1,912<small>回</small></div><div class="delta">空運転 −38%</div></div>
-        <div class="card kpi c4"><div class="label">次の混雑ピーク</div><div class="val num">13:15</div><div class="delta">3限開始前 / 待機配置を変更</div></div>
+        <div class="card kpi c4"><div class="label">本日の電力削減</div><div class="val num">86<small>kWh</small></div><div class="delta">約 ¥2,580・年間 31,000kWh</div></div>
       </div>
       <div class="grid" style="grid-template-columns: 1.5fr 1fr;">
         <div class="card">
@@ -343,6 +569,50 @@
         </div>
       </div>
     </section>
+    <!-- SDGs・広報 -->
+    <section class="view" id="v-sdgs">
+      <div class="grid kpis">
+        <div class="card kpi"><div class="label">CO₂ 削減量</div><div class="val num">142<small>t / 年</small></div><div class="delta">電力削減 約 31万kWh 相当</div></div>
+        <div class="card kpi c2"><div class="label">学生満足度（施設・環境）</div><div class="val num">4.1<small>/ 5</small></div><div class="delta">導入前 3.4 → +0.7</div></div>
+        <div class="card kpi c3"><div class="label">学生のアプリ利用率</div><div class="val num">68<small>%</small></div><div class="delta">月間 約 1.7万人</div></div>
+        <div class="card kpi c4"><div class="label">オープンキャンパス アプリ体験</div><div class="val num">1,280<small>人</small></div><div class="delta">体験者アンケート「志望度UP」72%</div></div>
+      </div>
+      <div class="grid" style="grid-template-columns: 1.15fr 1fr; margin-bottom:16px;">
+        <div class="card">
+          <h2>SDGsレポート（HP・パンフレット掲載用） <span class="note">自動作成・2030年度上期</span></h2>
+          <div class="rpt">
+            <div class="rh"><small>明治大学 駿河台キャンパス</small>データで、ムダのないキャンパスへ</div>
+            <div class="rb">
+              <div><span>SDG 7 エネルギー</span><b class="num">−18%</b><em>照明・空調の電力</em></div>
+              <div><span>SDG 12 つくる責任</span><b class="num">−3.1t</b><em>学食のフードロス / 年</em></div>
+              <div><span>SDG 13 気候変動</span><b class="num">−142t</b><em>CO₂ 排出量 / 年</em></div>
+            </div>
+          </div>
+          <div class="callout" style="margin-top:14px;">数値は毎月自動で更新。<b>HP・電車広告・パンフレット</b>にそのまま掲載でき、「環境に配慮した快適なキャンパス」をアピールできます。</div>
+        </div>
+        <div class="card">
+          <h2>学生満足度の推移 <span class="note">施設・環境の満足度（5段階）</span></h2>
+          <div id="sat-line"></div>
+        </div>
+      </div>
+      <div class="grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="card">
+          <h2>オープンキャンパスでのアプリ体験 <span class="note">2030年 夏</span></h2>
+          <table>
+            <thead><tr><th>体験メニュー</th><th class="r">体験者数</th><th class="r">満足度</th></tr></thead>
+            <tbody>
+              <tr><td>混雑マップで学内ツアー</td><td class="r num">620</td><td class="r num">4.6</td></tr>
+              <tr><td>学食の空き時間を見てランチ</td><td class="r num">410</td><td class="r num">4.5</td></tr>
+              <tr><td>図書館の学習室を予約体験</td><td class="r num">250</td><td class="r num">4.3</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <h2>志願者数の見込み <span class="note">人・目標</span></h2>
+          <div id="app-bars"></div>
+        </div>
+      </div>
+    </section>
   </main>
 </div>
 
@@ -353,13 +623,16 @@ const { DAYS, HOURS, FACILITIES, occupancy, level, LEVEL_LABEL, LEVEL_COLOR, mat
 document.getElementById('now').textContent = NOW.label;
 
 const TITLES = {
-  overview: ['全体サマリー', 'キャンパス全体の人の流れと、施設ごとの曜日別混雑データ'],
+  overview: ['ダッシュボード', '学内の人の流れ・混雑・電力・学食をリアルタイムで把握'],
+  effects: ['導入効果', 'データ活用で「コスト削減」と「選ばれる大学」を同時に実現（年間・試算）'],
+  sdgs: ['SDGs・広報', 'SDGsの取り組みと学生満足度を発信し、入学者増加につなげる'],
+  weekly: ['曜日別データ', '施設ごと・曜日ごとの混雑データ（過去8週の平均）'],
   cafeteria: ['学食', '食券・モバイルオーダー（生協連携）とカメラで、混雑と販売数を予測しフードロスを削減'],
   classroom: ['教室・空調', 'カメラで在室人数を把握し、空き教室の空調・照明を自動でOFF'],
   library: ['図書館', '机・グループ学習室の空き状況をリアルタイムで把握'],
   club: ['部室・練習場', '利用状況の把握と、無人時の空調自動OFF'],
   elevator: ['エレベーター', '各階の待ち人数から、効率よく運転'],
-  cleaning: ['清掃ルート提案', '利用人数データから清掃する場所と順番を提案'],
+  cleaning: ['清掃員の配置', '空き教室予測と利用人数から、清掃する場所・順番・人数を提案'],
 };
 
 function show(v) {
@@ -368,6 +641,7 @@ function show(v) {
   document.getElementById('title').textContent = TITLES[v][0];
   document.getElementById('subtitle').textContent = TITLES[v][1];
   history.replaceState(null, '', '?v=' + v);
+  if (v === 'overview' && window.placeTags) requestAnimationFrame(window.placeTags);
 }
 document.querySelectorAll('#nav button').forEach(b => b.onclick = () => show(b.dataset.v));
 window.showView = show;
@@ -446,18 +720,24 @@ document.getElementById('log').innerHTML = logs.map(l => `<li><span class="t num
     ], xmin: 10, xmax: 20, ymax: 100, width: 760, height: 260, nowX: NOW.h, unit: '%',
     xticks: [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20], xfmt: h => h + '時'
   });
-  document.getElementById('loss').innerHTML = Charts.bars({
-    labels: ['1月', '2月', '3月', '4月第1', '4月第2', '4月第3'],
-    values: [212, 205, 198, 168, 151, 136], colors: ['#BFE4F7', '#BFE4F7', '#BFE4F7', '#128FC9', '#128FC9', '#006FB8'],
-    width: 560, height: 220, unit: 'kg', note: '導入'
-  });
-  document.getElementById('cafe-week').innerHTML = Charts.bars({
-    labels: DAYS, values: DAYS.map((_, d) => occupancy('lt-cafe', d, 12.75)),
-    colors: DAYS.map((_, d) => LEVEL_COLOR[Math.max(2, level(occupancy('lt-cafe', d, 12.75)))]),
-    width: 560, height: 220, unit: '%', ymax: 100
-  });
+  // 曜日×時間帯 混雑予測（学食）
+  const ch = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+  let hh = '<div></div>' + ch.map(h => `<div class="hl">${h}</div>`).join('');
+  DAYS.forEach((d, di) => { hh += `<div class="dl">${d}</div>`; ch.forEach(h => { const v = occupancy('lt-cafe', di, h + 0.5); hh += `<div class="cell lv${level(v)}" style="height:30px">${v}</div>`; }); });
+  document.getElementById('cafe-heat').innerHTML = hh;
+  const menu = [['日替わり定食', 1240, '+8%', 1], ['カレーライス', 980, '+3%', 1], ['ラーメン', 760, '−2%', 0], ['唐揚げ丼', 610, '−6%', 0], ['サラダバー', 420, '+12%', 1]];
+  document.getElementById('menu-rank').innerHTML = menu.map((m, i) => `<li><span class="n">${i + 1}</span><span>${m[0]}</span><span class="bar"><i style="width:${m[1] / 13}%;background:${i < 2 ? '#006FB8' : '#5BBDE8'}"></i></span><span class="r"><span class="num">${m[1]}</span><br><span class="${m[3] ? 'up' : 'down'}">${m[2]}</span></span></li>`).join('');
 })();
 
+// 教室：空き教室予測
+const PERIOD_MID = [9.8, 11.7, 14.3, 16.2, 18, 19.8];
+function freeRooms(d, i) { const v = occupancy('lt-class', d, PERIOD_MID[i]); return Math.max(10, Math.min(176, Math.round(186 * (1 - v / 100 * (d === 5 ? 0.5 : 1.08))))); }
+function freeLv(n) { return n < 40 ? 0 : n < 70 ? 1 : n < 100 ? 2 : n < 140 ? 3 : 4; }
+(function () {
+  let h = '<div></div>' + ['1限', '2限', '3限', '4限', '5限', '6限'].map(x => `<div class="hl">${x}</div>`).join('');
+  DAYS.forEach((d, di) => { h += `<div class="dl">${d}</div>`; PERIOD_MID.forEach((_, i) => { const n = freeRooms(di, i); h += `<div class="cell lv${freeLv(n)}" style="height:30px">${n}</div>`; }); });
+  document.getElementById('room-pred').innerHTML = h;
+})();
 // 教室
 (function () {
   const rooms = [
@@ -528,6 +808,194 @@ document.getElementById('log').innerHTML = logs.map(l => `<li><span class="t num
     xs, series: [{ values: vals, color: '#006FB8', width: 3, fill: '#E4F5FD' }], xmin: 8, xmax: 19, ymax: 50,
     width: 460, height: 200, nowX: NOW.h, unit: '人', xticks: [9, 11, 13, 15, 17, 19], xfmt: h => h + '時'
   });
+})();
+
+// ===== ダッシュボード =====
+(function () {
+  // 間取り（平面座標 520×340）
+  const ROOMS = [
+    { n: '学食', r: [0, 0, 220, 170], f: '#E8EEF3' },
+    { n: 'ロビー', r: [220, 0, 140, 340], f: '#F1F5F8' },
+    { n: 'EVホール', r: [360, 0, 160, 90], f: '#E8EEF3' },
+    { n: '講義室A', r: [360, 90, 160, 125], f: '#EDF2F6' },
+    { n: '講義室B', r: [360, 215, 160, 125], f: '#EDF2F6' },
+    { n: '購買', r: [0, 170, 110, 80], f: '#EDF2F6' },
+    { n: '相談室', r: [110, 170, 110, 80], f: '#EDF2F6' },
+    { n: '自習室', r: [0, 250, 220, 90], f: '#EDF2F6' },
+  ];
+  const WALLS = [
+    [0, 0, 520, 0], [520, 0, 520, 340], [0, 0, 0, 340], [0, 340, 255, 340], [325, 340, 520, 340],
+    [220, 0, 220, 60], [220, 120, 220, 170], [0, 170, 220, 170], [110, 170, 110, 250], [0, 250, 220, 250],
+    [220, 170, 220, 190], [220, 230, 220, 270], [220, 300, 220, 340],
+    [360, 0, 360, 15], [360, 75, 360, 110], [360, 150, 360, 240], [360, 280, 360, 340],
+    [360, 90, 520, 90], [360, 215, 520, 215],
+  ];
+  const iso = document.getElementById('iso');
+  WALLS.forEach(([x1, y1, x2, y2]) => {
+    const len = Math.hypot(x2 - x1, y2 - y1), ang = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+    const w = document.createElement('div');
+    w.className = 'wall' + (x1 === x2 ? ' v' : '');
+    w.style.cssText = `left:${x1}px;top:${y1}px;width:${len}px;transform:rotateZ(${ang}deg) rotateX(90deg);`;
+    iso.appendChild(w);
+  });
+
+  // 床
+  const fc = document.getElementById('iso-floor').getContext('2d');
+  fc.scale(2, 2);
+  fc.fillStyle = '#F4F7FA'; fc.fillRect(0, 0, 520, 340);
+  ROOMS.forEach(rm => {
+    const [x, y, w, h] = rm.r;
+    fc.fillStyle = rm.f; fc.fillRect(x, y, w, h);
+  });
+  // 学食のテーブル
+  fc.fillStyle = '#D3DDE5';
+  for (let i = 0; i < 4; i++) for (let j = 0; j < 3; j++) fc.fillRect(22 + i * 48, 22 + j * 46, 28, 18);
+  // 自習室の机
+  for (let i = 0; i < 6; i++) fc.fillRect(14 + i * 34, 300, 24, 26);
+  // 講義室の机列
+  for (let k = 0; k < 2; k++) for (let i = 0; i < 4; i++) fc.fillRect(380, 108 + k * 125 + i * 24, 120, 8);
+  // エレベーター
+  fc.fillStyle = '#7F93A3';
+  for (let i = 0; i < 3; i++) fc.fillRect(484, 12 + i * 25, 26, 18);
+  document.fonts.ready.then(() => {
+  fc.fillStyle = '#4A4545'; fc.font = '900 13px "Noto Sans JP"'; fc.textAlign = 'center';
+  ROOMS.forEach(rm => { const [x, y, w, h] = rm.r; if (rm.n !== '講義室A' && rm.n !== '講義室B') fc.fillText(rm.n, x + w / 2, y + h / 2 + 4); else fc.fillText(rm.n, x + w / 2, y + 22); });
+  });
+
+  // ヒート
+  const HOT = [
+    [60, 50, 1], [115, 70, 1], [160, 40, .9], [90, 125, .95], [175, 115, .85], [40, 120, .75], [200, 80, .8],
+    [235, 90, .9], [285, 60, .6], [295, 160, .7], [285, 245, .55], [290, 318, .75],
+    [400, 45, 1], [445, 50, .85], [380, 30, .7],
+    [430, 160, .25], [450, 290, .12], [55, 210, .6], [165, 205, .15], [60, 300, .2], [160, 295, .18],
+  ];
+  const hc = document.getElementById('iso-heat'), hx = hc.getContext('2d');
+  const tmp = document.createElement('canvas'); tmp.width = 520; tmp.height = 340; const tx = tmp.getContext('2d');
+  const STOPS = [[0, [217, 243, 252, 0]], [.15, [217, 243, 252, 150]], [.35, [117, 214, 255, 190]], [.55, [47, 205, 234, 210]], [.75, [18, 143, 201, 225]], [1, [11, 63, 110, 235]]];
+  const PAL = new Uint8ClampedArray(256 * 4);
+  for (let i = 0; i < 256; i++) {
+    const t = i / 255; let k = 0; while (k < STOPS.length - 2 && t > STOPS[k + 1][0]) k++;
+    const [t0, c0] = STOPS[k], [t1, c1] = STOPS[k + 1], u = (t - t0) / (t1 - t0);
+    for (let j = 0; j < 4; j++) PAL[i * 4 + j] = c0[j] + (c1[j] - c0[j]) * Math.max(0, Math.min(1, u));
+  }
+  function drawHeat(tm) {
+    tx.clearRect(0, 0, 520, 340);
+    HOT.forEach(([x, y, v], i) => {
+      const vv = Math.max(.05, Math.min(1, v + Math.sin(tm / 900 + i * 1.7) * 0.08));
+      const r = 34 + vv * 22;
+      const g = tx.createRadialGradient(x, y, 0, x, y, r);
+      g.addColorStop(0, `rgba(0,0,0,${vv * 0.8})`); g.addColorStop(1, 'rgba(0,0,0,0)');
+      tx.fillStyle = g; tx.fillRect(x - r, y - r, r * 2, r * 2);
+    });
+    const img = tx.getImageData(0, 0, 520, 340), d = img.data;
+    for (let i = 0; i < d.length; i += 4) { const a = Math.min(255, d[i + 3] * 1.25) | 0; d[i] = PAL[a * 4]; d[i + 1] = PAL[a * 4 + 1]; d[i + 2] = PAL[a * 4 + 2]; d[i + 3] = PAL[a * 4 + 3]; }
+    tx.putImageData(img, 0, 0);
+    hx.clearRect(0, 0, 1040, 680); hx.imageSmoothingEnabled = true; hx.drawImage(tmp, 0, 0, 1040, 680);
+  }
+  drawHeat(0);
+  setInterval(() => drawHeat(performance.now()), 600);
+
+  // 人の流れ（矢印）
+  const flows = [
+    'M290,336 L290,200 L290,90 L228,90 L150,90',
+    'M290,200 L330,120 L330,45 L420,45',
+    'M290,290 L222,285 L120,295',
+  ];
+  let svg = `<defs><marker id="ah" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0B3F6E"/></marker></defs>`;
+  flows.forEach((d, i) => {
+    svg += `<path d="${d}" fill="none" stroke="#0B3F6E" stroke-width="3" stroke-linejoin="round" stroke-dasharray="7 5" marker-end="url(#ah)" opacity=".85"><animate attributeName="stroke-dashoffset" from="24" to="0" dur="1s" repeatCount="indefinite"/></path>`;
+    for (let k = 0; k < 3; k++) svg += `<circle r="4" fill="#fff" stroke="#0B3F6E" stroke-width="2"><animateMotion dur="${4 + i}s" begin="${-k * (4 + i) / 3}s" repeatCount="indefinite" path="${d}"/></circle>`;
+  });
+  document.getElementById('iso-flow').innerHTML = svg;
+
+  // 立体の上に浮かぶラベル
+  const TAGS = [[110, 80, '学食 89%', 'hot'], [290, 130, 'ロビー 64%', ''], [420, 40, 'EVホール 34人待ち', 'hot'], [110, 300, '自習室 9%', 'cool'], [440, 290, '講義室B 12%', 'cool']];
+  const tagsEl = document.getElementById('iso-tags');
+  function placeTags() {
+    const st = document.getElementById('iso-stage').getBoundingClientRect();
+    if (!st.width) return;
+    tagsEl.innerHTML = '';
+    TAGS.forEach(([x, y, t, c]) => {
+      const m = document.createElement('i'); m.style.cssText = `position:absolute;left:${x}px;top:${y}px;width:1px;height:1px;`;
+      iso.appendChild(m); const r = m.getBoundingClientRect(); m.remove();
+      const el = document.createElement('div'); el.className = 'itag ' + c; el.textContent = t;
+      el.style.left = (r.left - st.left) + 'px'; el.style.top = (r.top - st.top - 14) + 'px';
+      tagsEl.appendChild(el);
+    });
+  }
+  window.placeTags = placeTags;
+  requestAnimationFrame(placeTags); window.addEventListener('resize', placeTags);
+
+  // エリア別
+  const spots = [['学食', 'Cafeteria', 'lt-cafe', '#0B3F6E'], ['図書館', 'Library', 'lib', '#128FC9'], ['講義室', 'Classroom', 'lt-class', '#2FCDEA'], ['自習室', 'Study', 'study', '#2FCDEA']];
+  document.getElementById('spots').innerHTML = spots.map(([n, e, id]) => {
+    const v = id === 'study' ? 9 : occupancy(id, NOW.day, NOW.h), lv = level(v);
+    return `<div class="spot"><div><b>${n}</b><small>${e}</small></div><span class="pillv" style="background:${LEVEL_COLOR[lv]};color:${lv >= 3 ? '#fff' : '#0B3F6E'}">${v}% ${['空き', 'やや空き', '普通', 'やや混雑', '混雑'][lv]}</span></div>`;
+  }).join('');
+  const xsA = [], xsP = [];
+  for (let h = 8; h <= NOW.h + 0.01; h += 0.25) xsA.push(h);
+  for (let h = Math.floor(NOW.h * 4) / 4; h <= 20; h += 0.25) xsP.push(h);
+  const ser = [];
+  const occ = (id, h) => id === 'study' ? Math.round(6 + 30 * Math.exp(-((h - 15.5) ** 2) / 8) + 6 * Math.exp(-((h - 10) ** 2) / 2)) : occupancy(id, NOW.day, h);
+  [spots[0], spots[1], spots[3]].forEach(([n, , id, col]) => {
+    ser.push({ xs: xsA, values: xsA.map(h => occ(id, h)), color: col, width: 3, dot: true, fill: id === 'lt-cafe' ? '#0B3F6E' : null, fillOpacity: .08 });
+    ser.push({ xs: xsP, values: xsP.map(h => Math.max(2, Math.round(occ(id, h) * 0.96 + 2))), color: col, width: 2.5, dash: true });
+  });
+  document.getElementById('area-line').innerHTML = Charts.line({ xs: xsA, series: ser, xmin: 8, xmax: 20, ymax: 100, width: 470, height: 280, nowX: NOW.h, unit: '%', xticks: [8, 10, 12, 14, 16, 18, 20], xfmt: h => h + '時' });
+  document.getElementById('area-legend').innerHTML = [spots[0], spots[1], spots[3]].map(([n, , , c]) => `<span><i style="background:${c}"></i>${n}</span>`).join('') + '<span><i class="dash" style="border-color:#8A8686"></i>AI予測</span>';
+
+  // 電力
+  const hrs = []; for (let h = 0; h <= 23; h++) hrs.push(h);
+  const kw = h => Math.round(85 + 230 * Math.exp(-((h - 11.5) ** 2) / 6) + 150 * Math.exp(-((h - 16.5) ** 2) / 4) + 40 * Math.exp(-((h - 19) ** 2) / 2));
+  const actH = hrs.filter(h => h <= 12);
+  document.getElementById('power-line').innerHTML = Charts.line({
+    xs: hrs, series: [
+      { values: hrs.map(h => Math.round(kw(h) * 1.18)), color: '#D6E4EE', width: 2.5 },
+      { values: hrs.map(h => Math.round(kw(h) * 1.03)), color: '#2FCDEA', width: 2.5, dash: true },
+      { xs: actH, values: actH.map(h => kw(h) + Math.round((CF.hash('kw' + h) - .5) * 24)), color: '#006FB8', width: 3, dot: true },
+    ], xmin: 0, xmax: 23, ymax: 500, width: 470, height: 170, nowX: NOW.h, unit: '', xticks: [0, 3, 6, 9, 12, 15, 18, 21], xfmt: h => h + '時'
+  });
+
+  // 学食
+  const xo = [], xoA = [];
+  for (let h = 10; h <= 20; h += 0.5) xo.push(h);
+  xo.forEach(h => { if (h <= NOW.h) xoA.push(h); });
+  let cum = 0; const cumF = xo.map(h => (cum += occupancy('lt-cafe', NOW.day, h) * 2.4 + occupancy('b12-cafe', NOW.day, h) * 1.1, Math.round(cum)));
+  const scale = 2140 / cumF[cumF.length - 1];
+  const fc2 = cumF.map(v => Math.round(v * scale));
+  document.getElementById('order-area').innerHTML = Charts.line({
+    xs: xo, series: [
+      { values: fc2, color: '#2FCDEA', width: 2.5, dash: true },
+      { xs: xoA, values: xoA.map((h, i) => Math.round(fc2[i] * (1 + (CF.hash('o' + i) - .5) * 0.05))), color: '#006FB8', width: 3, fill: '#128FC9', fillOpacity: .22, dot: true },
+    ], xmin: 10, xmax: 20, ymax: 2500, width: 300, height: 236, nowX: NOW.h, unit: '', xticks: [10, 13, 16, 19], xfmt: h => h + '時'
+  });
+  document.getElementById('loss-combo').innerHTML = Charts.combo({
+    labels: ['3月', '4/1週', '4/2週', '4/3週'], values: [4.8, 3.6, 2.9, 2.3], colors: ['#BFE4F7', '#5BBDE8', '#128FC9', '#006FB8'],
+    ymax: 6, unit: '%', target: 3, targetLabel: '目標 3%以下', width: 300, height: 236
+  });
+  document.getElementById('k-people2').textContent = document.getElementById('k-people').textContent.replace('人', '') + '人';
+})();
+
+// ===== 導入効果・SDGs =====
+(function () {
+  // 学食ミニヒートマップ
+  const ch = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
+  let h = '<div class="l"></div>' + ch.map(x => `<div class="l">${x}</div>`).join('');
+  DAYS.forEach((d, di) => { h += `<div class="l">${d}</div>`; ch.forEach(x => { const v = occupancy('lt-cafe', di, x + 0.5); h += `<div class="lv${level(v)}"></div>`; }); });
+  const ec = document.getElementById('eff-cafe'); ec.style.gridTemplateColumns = '18px repeat(10,1fr)'; ec.innerHTML = h;
+  // 空き教室ミニ
+  h = '<div class="l"></div>' + ['1限', '2限', '3限', '4限', '5限', '6限'].map(x => `<div class="l">${x}</div>`).join('');
+  DAYS.forEach((d, di) => { h += `<div class="l">${d}</div>`; PERIOD_MID.forEach((_, i) => { const n = freeRooms(di, i); h += `<div class="lv${freeLv(n)}">${n}</div>`; }); });
+  const er = document.getElementById('eff-room'); er.style.gridTemplateColumns = '18px repeat(6,1fr)'; er.innerHTML = h;
+  // エレベーター電力
+  document.getElementById('eff-elv').innerHTML = Charts.groupedBars({ labels: DAYS, series: [
+    { name: '導入前', color: '#BFE4F7', values: [520, 535, 515, 528, 498, 240] },
+    { name: '導入後', color: '#006FB8', values: [410, 421, 405, 416, 395, 188] }], width: 330, height: 200 });
+  // 満足度
+  const sem = ['29前', '29後', '30前', '30後', '31前'];
+  document.getElementById('eff-sat').innerHTML = Charts.bars({ labels: sem, values: [3.4, 3.5, 3.8, 4.1, 4.3], colors: ['#BFE4F7', '#BFE4F7', '#5BBDE8', '#128FC9', '#006FB8'], ymax: 5, width: 330, height: 170 });
+  document.getElementById('sat-line').innerHTML = Charts.bars({ labels: ['2029前期', '2029後期', '2030前期（導入）', '2030後期', '2031前期（予測）'], values: [3.3, 3.4, 3.8, 4.1, 4.3], colors: ['#BFE4F7', '#BFE4F7', '#5BBDE8', '#006FB8', '#0B3F6E'], ymax: 5, width: 560, height: 280 });
+  document.getElementById('app-bars').innerHTML = Charts.bars({ labels: ['2028', '2029', '2030', '2031(目標)', '2032(目標)'], values: [10420, 10180, 10650, 11290, 11800], colors: ['#BFE4F7', '#BFE4F7', '#128FC9', '#006FB8', '#0B3F6E'], ymax: 14000, width: 560, height: 200, unit: '人' });
 })();
 
 const qv = new URLSearchParams(location.search).get('v');

@@ -94,6 +94,47 @@
   .best li { list-style: none; display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 8px; margin-bottom: 6px; font-size: 14px; font-weight: 800; }
 
   /* 予約 */
+  .rv-cats { display: flex; gap: 6px; padding: 0 18px 10px; }
+  .rv-cats button { padding: 7px 12px; border-radius: 18px; border: 1.5px solid var(--line); font-size: 12px; font-weight: 800; color: var(--ink-2); }
+  .rv-cats button.on { background: var(--blue-700); border-color: var(--blue-700); color: #fff; }
+  .rv-h { font-size: 13px; font-weight: 900; color: var(--ink-2); margin: 4px 0 8px; display: flex; justify-content: space-between; }
+  .rooms { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 14px; }
+  .room { display: block; position: relative; text-align: left; padding: 9px 10px 9px 34px; border: 1.5px solid var(--line); border-radius: 10px; }
+  .room .rd { position: absolute; left: 10px; top: 11px; width: 17px; height: 17px; border-radius: 50%; border: 2px solid #C3CED6; }
+  .room.on { border-color: var(--blue-700); background: var(--sky-50); }
+  .room.on .rd { border: 5px solid var(--blue-700); }
+  .room b { display: block; font-size: 14px; font-weight: 900; }
+  .room .tag { margin-top: 5px; }
+  .room small { display: block; font-size: 10.5px; line-height: 1.35; font-weight: 700; color: var(--ink-3); }
+  .rv-days { display: flex; gap: 6px; margin-bottom: 10px; }
+  .rv-days button { flex: 1; padding: 7px 0; border-radius: 8px; border: 1.5px solid var(--line); font-size: 12px; font-weight: 800; color: var(--ink-2); }
+  .rv-days button.on { border-color: var(--blue-700); color: var(--blue-700); background: var(--sky-50); }
+  .slots2 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .slots2 button { padding: 8px 4px; border-radius: 8px; font-size: 13px; font-weight: 900; background: #fff; color: var(--blue-700); border: 1.5px solid #BFE4F7; line-height: 1.3; }
+  .slots2 button small { display: block; font-size: 10px; font-weight: 700; color: var(--ink-3); }
+  .slots2 button.full { background: #F1F3F5; color: #B6BBC0; border-color: #F1F3F5; cursor: default; }
+  .slots2 button.full small { color: #B6BBC0; }
+  .slots2 button.sel { background: var(--blue-700); color: #fff; border-color: var(--blue-700); }
+  .slots2 button.sel small { color: #D6EEFB; }
+  .rv-bar { border-top: 1px solid var(--line); padding: 10px 18px 10px; background: #fff; }
+  .rv-sum { font-size: 12px; font-weight: 800; color: var(--ink-3); margin-bottom: 8px; min-height: 17px; }
+  .rv-sum b { color: var(--ink); font-weight: 900; }
+  .btn-main { width: 100%; padding: 14px 0; border-radius: 12px; background: var(--blue-700); color: #fff; font-size: 16px; font-weight: 900; }
+  .btn-main:disabled { background: #C9D3DB; cursor: default; }
+  .btn-sub { width: 100%; padding: 13px 0; border-radius: 12px; border: 1.5px solid var(--blue-700); color: var(--blue-700); font-size: 15px; font-weight: 900; margin-top: 8px; }
+  .done { position: absolute; inset: 0; background: #fff; z-index: 950; display: none; flex-direction: column; padding: 28px 22px 18px; }
+  .done.on { display: flex; }
+  .done .ck { width: 72px; height: 72px; border-radius: 50%; background: var(--blue-700); display: grid; place-items: center; margin: 18px auto 14px; }
+  .done .ck svg { width: 36px; height: 36px; stroke: #fff; fill: none; stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+  .done h2 { text-align: center; font-size: 22px; font-weight: 900; }
+  .done .lead { text-align: center; font-size: 13px; font-weight: 700; color: var(--ink-3); margin-top: 4px; }
+  .ticket { margin-top: 20px; border: 1.5px solid var(--line); border-radius: 12px; overflow: hidden; }
+  .ticket .tt { background: var(--sky-50); padding: 12px 16px; font-size: 17px; font-weight: 900; border-bottom: 1.5px dashed #BFE4F7; }
+  .ticket .tt small { display: block; font-size: 11px; font-weight: 800; color: var(--blue-700); margin-bottom: 2px; }
+  .ticket dl { display: grid; grid-template-columns: 70px 1fr; gap: 8px 10px; padding: 14px 16px; font-size: 14px; font-weight: 800; }
+  .ticket dt { color: var(--ink-3); font-size: 12px; font-weight: 800; padding-top: 1px; }
+  .done .note2 { font-size: 12px; font-weight: 700; color: var(--ink-2); background: var(--sky-50); border-radius: 8px; padding: 10px 12px; margin-top: 12px; line-height: 1.6; }
+  .done .acts { margin-top: auto; }
   .rv-card { border: 1.5px solid var(--line); border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; }
   .rv-card h4 { font-size: 15px; font-weight: 900; display: flex; justify-content: space-between; align-items: center; }
   .rv-card p { font-size: 12px; font-weight: 700; color: var(--ink-3); margin-top: 2px; }
@@ -145,8 +186,25 @@
 
   <!-- 予約 -->
   <section class="screen" id="s-reserve">
-    <div class="head"><h1>その場で予約</h1><p>4月17日（水）の空き枠</p></div>
-    <div class="scroll" id="rv"></div>
+    <div class="head"><h1>その場で予約</h1><p>場所と時間を選んで「予約する」</p></div>
+    <div class="rv-cats" id="rvcats"></div>
+    <div class="scroll" id="rv">
+      <div class="rv-h"><span>場所を選ぶ</span><span id="rvcount"></span></div>
+      <div class="rooms" id="rooms"></div>
+      <div class="rv-h"><span>日にち・時間を選ぶ</span></div>
+      <div class="rv-days" id="rvdays"></div>
+      <div class="slots2" id="slots"></div>
+    </div>
+    <div class="rv-bar"><div class="rv-sum" id="rvsum">時間を選んでください</div><button class="btn-main" id="rvbtn" disabled>予約する</button></div>
+    <div class="done" id="done">
+      <div class="ck"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h2>予約が完了しました</h2>
+      <div class="lead">開始10分前に通知でお知らせします</div>
+      <div class="ticket"><div class="tt"><small id="dn-cat"></small><span id="dn-room"></span></div>
+        <dl><dt>日時</dt><dd id="dn-time"></dd><dt>場所</dt><dd id="dn-place"></dd><dt>定員</dt><dd id="dn-cap"></dd><dt>予約番号</dt><dd class="num" id="dn-no"></dd></dl></div>
+      <div class="note2">入室時に学生証を入口のリーダーにかざしてください。15分以上使われない場合は自動でキャンセルされ、空調も自動でOFFになります。</div>
+      <div class="acts"><button class="btn-main" id="dn-map">マップで場所を見る</button><button class="btn-sub" id="dn-back">続けて予約する</button></div>
+    </div>
   </section>
 
   <!-- チャット -->
@@ -179,6 +237,7 @@ const textOn = lv => lv >= 3 ? '#fff' : '#0B3F6E';
 
 // ---------- タブ ----------
 function tab(s) {
+  const dn = document.getElementById('done'); if (dn) dn.classList.remove('on');
   document.querySelectorAll('#tabs button').forEach(b => b.classList.toggle('on', b.dataset.s === s));
   document.querySelectorAll('.screen').forEach(x => x.classList.toggle('on', x.id === 's-' + s));
   if (s === 'map') setTimeout(() => { map.invalidateSize(); fitCampus(); }, 0);
@@ -269,19 +328,79 @@ function renderList() {
 // ---------- 予約 ----------
 const toast = document.getElementById('toast');
 function showToast(t) { toast.textContent = t; toast.classList.add('on'); clearTimeout(showToast.t); showToast.t = setTimeout(() => toast.classList.remove('on'), 2200); }
-const rvs = [
-  { nm: '図書館 グループ学習室', sub: '中央図書館 1階・4〜6人', slots: ['13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'], full: [0, 2, 3] },
-  { nm: '図書館 閲覧席（電源つき）', sub: '地下1階 閲覧室・1人', slots: ['13:00', '14:00', '15:00', '16:00'], full: [] },
-  { nm: 'アカデミーコモン 練習場B', sub: '軽音・ダンス・最大20人', slots: ['13:00', '15:00', '17:00', '19:00'], full: [2, 3] },
-  { nm: '学食 モバイルオーダー受取', sub: 'リバティタワー学食・生協アプリ連携', slots: ['12:50', '13:00', '13:10', '13:20'], full: [0] },
-];
-document.getElementById('rv').innerHTML = rvs.map((r, i) => `<div class="rv-card"><h4>${r.nm}<span class="tag blue">空き ${r.slots.length - r.full.length}</span></h4><p>${r.sub}</p>
-  <div class="slots">${r.slots.map((s, j) => `<button class="${r.full.includes(j) ? 'full' : ''}" data-i="${i}" data-s="${s}">${s}</button>`).join('')}</div></div>`).join('');
-document.querySelectorAll('#rv .slots button').forEach(b => b.onclick = () => {
-  if (b.classList.contains('full')) return;
-  b.classList.toggle('mine');
-  showToast(b.classList.contains('mine') ? `${rvs[b.dataset.i].nm} ${b.dataset.s} を予約しました` : '予約を取り消しました');
-});
+const PERIOD_SLOTS = [['1限', '9:00-10:40'], ['2限', '10:50-12:30'], ['3限', '13:30-15:10'], ['4限', '15:20-17:00'], ['5限', '17:10-18:50'], ['6限', '19:00-20:40']];
+const HOUR_SLOTS = ['13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00', '21:00'].map((t, i, a) => [t + '〜', '1時間']);
+const RV = {
+  classroom: { nm: '教室', slots: 'period', rooms: [
+    { id: 'c1053', nm: '1053教室', place: 'リバティタワー 5階', cap: 40, fac: 'lt-class' },
+    { id: 'c1092', nm: '1092教室', place: 'リバティタワー 9階', cap: 200, fac: 'lt-class' },
+    { id: 'c1103', nm: '1103教室', place: 'リバティタワー 10階', cap: 150, fac: 'lt-class' },
+    { id: 'c1145', nm: '1145教室', place: 'リバティタワー 14階', cap: 60, fac: 'lt-class' },
+    { id: 'g4021', nm: '4021教室', place: 'グローバルフロント 2階', cap: 30, fac: 'gf-class' },
+    { id: 'g4041', nm: '4041教室', place: 'グローバルフロント 4階', cap: 48, fac: 'gf-class' },
+  ] },
+  study: { nm: 'グループ学習室', slots: 'hour', rooms: [
+    { id: 'gs1', nm: 'グループ学習室 A', place: '中央図書館 1階', cap: 6, fac: 'lib' },
+    { id: 'gs2', nm: 'グループ学習室 B', place: '中央図書館 1階', cap: 6, fac: 'lib' },
+    { id: 'gs3', nm: 'グループ学習室 C', place: '中央図書館 2階', cap: 10, fac: 'lib' },
+  ] },
+  club: { nm: '練習場', slots: 'hour', rooms: [
+    { id: 'p1', nm: '練習場 A（ダンス）', place: 'アカデミーコモン 地下1階', cap: 30, fac: 'ac-club' },
+    { id: 'p2', nm: '練習場 B（軽音）', place: 'アカデミーコモン 地下1階', cap: 20, fac: 'ac-club' },
+    { id: 'p3', nm: '練習室 C', place: '14号館 3階', cap: 15, fac: 'b14-club' },
+  ] },
+};
+const RV_DAYS = ['今日 4/17（水）', '明日 4/18（木）', '4/19（金）'];
+const rv = { cat: 'classroom', room: 'c1053', day: 0, slot: null, mine: {} };
+function slotList() { return RV[rv.cat].slots === 'period' ? PERIOD_SLOTS : HOUR_SLOTS; }
+function isFull(roomId, day, i) {
+  if (rv.mine[roomId + day + ':' + i]) return true;
+  if (day === 0 && RV[rv.cat].slots === 'period' && i < 2) return true; // 終了した時限
+  return CF.hash(roomId + day + 's' + i) < 0.38;
+}
+const rvcats = document.getElementById('rvcats');
+rvcats.innerHTML = Object.entries(RV).map(([k, v]) => `<button data-k="${k}">${v.nm}</button>`).join('');
+rvcats.querySelectorAll('button').forEach(b => b.onclick = () => { rv.cat = b.dataset.k; rv.room = RV[rv.cat].rooms[0].id; rv.slot = null; renderRv(); });
+function renderRv() {
+  rvcats.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.k === rv.cat));
+  const cat = RV[rv.cat], sl = slotList();
+  document.getElementById('rvcount').textContent = cat.rooms.length + 'か所';
+  document.getElementById('rooms').innerHTML = cat.rooms.map(r => {
+    const free = sl.filter((_, i) => !isFull(r.id, rv.day, i)).length;
+    return `<button class="room ${r.id === rv.room ? 'on' : ''}" data-id="${r.id}"><span class="rd"></span><span><b>${r.nm}</b><small>${r.place}・${r.cap}人</small></span><span class="tag ${free ? 'blue' : 'gray'}">空き ${free}</span></button>`;
+  }).join('');
+  document.querySelectorAll('#rooms .room').forEach(b => b.onclick = () => { rv.room = b.dataset.id; rv.slot = null; renderRv(); });
+  document.getElementById('rvdays').innerHTML = RV_DAYS.map((d, i) => `<button class="${i === rv.day ? 'on' : ''}" data-i="${i}">${d}</button>`).join('');
+  document.querySelectorAll('#rvdays button').forEach(b => b.onclick = () => { rv.day = +b.dataset.i; rv.slot = null; renderRv(); });
+  document.getElementById('slots').innerHTML = sl.map((s, i) => {
+    const full = isFull(rv.room, rv.day, i);
+    return `<button class="${full ? 'full' : ''} ${rv.slot === i ? 'sel' : ''}" data-i="${i}" ${full ? 'disabled' : ''}>${s[0]}<small>${full ? '予約済み' : s[1]}</small></button>`;
+  }).join('');
+  document.querySelectorAll('#slots button:not(.full)').forEach(b => b.onclick = () => { rv.slot = +b.dataset.i; renderRv(); });
+  const room = cat.rooms.find(r => r.id === rv.room);
+  const btn = document.getElementById('rvbtn');
+  btn.disabled = rv.slot == null;
+  document.getElementById('rvsum').innerHTML = rv.slot == null ? `<b>${room.nm}</b>・時間を選んでください` : `<b>${room.nm}</b>　${RV_DAYS[rv.day]}　<b>${sl[rv.slot].join(' ')}</b>`;
+}
+document.getElementById('rvbtn').onclick = () => {
+  const cat = RV[rv.cat], room = cat.rooms.find(r => r.id === rv.room), s = slotList()[rv.slot];
+  rv.mine[rv.room + rv.day + ':' + rv.slot] = true;
+  document.getElementById('dn-cat').textContent = cat.nm;
+  document.getElementById('dn-room').textContent = room.nm;
+  document.getElementById('dn-time').textContent = `${RV_DAYS[rv.day]}　${s[0]}${s[1] === '1時間' ? '（1時間）' : ' ' + s[1]}`;
+  document.getElementById('dn-place').textContent = room.place;
+  document.getElementById('dn-cap').textContent = `最大 ${room.cap}人`;
+  document.getElementById('dn-no').textContent = 'CF-0417-' + String(Math.floor(CF.hash(room.id + rv.slot) * 9000) + 1000);
+  document.getElementById('done').classList.add('on');
+  rv.slot = null; renderRv();
+};
+document.getElementById('dn-back').onclick = () => document.getElementById('done').classList.remove('on');
+document.getElementById('dn-map').onclick = () => {
+  document.getElementById('done').classList.remove('on');
+  const room = RV[rv.cat].rooms.find(r => r.id === rv.room);
+  state.sel = room.fac; render(); tab('map');
+};
+renderRv();
 
 // ---------- チャット ----------
 const chat = document.getElementById('chat');
@@ -323,7 +442,7 @@ bot('こんにちは。キャンパスの混雑状況を案内します。下の
 
 render(); renderList();
 if (params.get('tab')) tab(params.get('tab'));
-window.App = { tab, ask, state, render, map, setSel: id => { state.sel = id; render(); }, setSeg: t => document.querySelector(`#seg button[data-t=${t}]`).click() };
+window.App = { tab, ask, state, render, map, setSel: id => { state.sel = id; render(); }, rv, renderRv, setSeg: t => document.querySelector(`#seg button[data-t=${t}]`).click() };
 </script>
 </body>
 </html>
