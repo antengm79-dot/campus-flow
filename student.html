@@ -110,7 +110,7 @@
   .msg.bot { background: #F0F4F7; align-self: flex-start; border-bottom-left-radius: 4px; }
   .msg.me { background: var(--blue-700); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
   .msg b { color: var(--blue-700); font-weight: 900; }
-  .msg .mbar { height: 8px; background: #fff; border-radius: 4px; margin-top: 6px; overflow: hidden; }
+  .msg .mbar { height: 8px; background: #fff; border-radius: 4px; margin: 6px 0 8px; overflow: hidden; }
   .msg .mbar i { display: block; height: 100%; border-radius: 4px; }
   .quick { display: flex; gap: 6px; overflow-x: auto; padding: 8px 16px; scrollbar-width: none; border-top: 1px solid var(--line); }
   .quick button { flex: none; padding: 8px 12px; border-radius: 18px; border: 1.5px solid var(--blue-500); color: var(--blue-700); font-size: 12px; font-weight: 800; }
@@ -172,7 +172,7 @@
 <script>
 const { DAYS, HOURS, FACILITIES, occupancy, level, LEVEL_LABEL, LEVEL_COLOR, NOW, fmtTime, CAMPUS_CENTER } = CF;
 const params = new URLSearchParams(location.search);
-if (params.has('bare')) document.body.classList.add('bare');
+if (params.has('bare')) { document.body.classList.add('bare'); document.documentElement.style.background = 'transparent'; }
 
 const state = { day: NOW.day, h: NOW.h, sel: 'lt-cafe' };
 const textOn = lv => lv >= 3 ? '#fff' : '#0B3F6E';
@@ -293,18 +293,18 @@ function answer(q) {
   if (/学食|食堂|ごはん|ランチ|昼/.test(q)) {
     const a = cur('lt-cafe'), b = cur('b12-cafe');
     let next = null; for (let t = h; t <= 15; t += 0.25) if (occupancy('lt-cafe', d, t) < 40) { next = t; break; }
-    return `いまのリバティタワー学食は<b>${LEVEL_LABEL[level(a)]}（${a}%）</b>です。${barHTML(a)}<br>12号館カフェテリアは<b>${b}%</b>。${next ? `<br>リバティタワー学食は<b>${fmtTime(Math.round(next * 4) / 4)}ごろ</b>から空く予測です。` : ''}`;
+    return `いまのリバティタワー学食は<b>${LEVEL_LABEL[level(a)]}（${a}%）</b>です。${barHTML(a)}12号館カフェテリアは<b>${b}%</b>。${next ? `<br>リバティタワー学食は<b>${fmtTime(Math.round(next * 4) / 4)}ごろ</b>から空く予測です。` : ''}`;
   }
   if (/図書館|自習|席/.test(q)) {
     const a = cur('lib');
-    return `中央図書館は<b>${a}%</b>（${LEVEL_LABEL[level(a)]}）。${barHTML(a)}<br>地下1階 閲覧室に<b>空席 約240席</b>あります。グループ学習室は<b>3室</b>空いています。`;
+    return `中央図書館は<b>${a}%</b>（${LEVEL_LABEL[level(a)]}）。${barHTML(a)}地下1階 閲覧室に<b>空席 約240席</b>あります。グループ学習室は<b>3室</b>空いています。`;
   }
   if (/教室|空き/.test(q)) {
     return `3限（13:30〜）に空いている教室は<b>38室</b>です。<br>近いところ：<b>リバティタワー 1053・1092・1103</b>`;
   }
   if (/練習|部室|サークル/.test(q)) {
     const a = occupancy('ac-club', d, 18.5);
-    return `今日の18時台のアカデミーコモン練習場は<b>${a}%</b>の予測です。${barHTML(a)}<br>13時・15時の枠はまだ予約できます。`;
+    return `今日の18時台のアカデミーコモン練習場は<b>${a}%</b>の予測です。${barHTML(a)}13時・15時の枠はまだ予約できます。`;
   }
   if (/エレベーター|エレベータ/.test(q)) {
     return `リバティタワー1階のエレベーター待ちは<b>約34人</b>。13:10〜13:30は特に混みます。<br>低層階なら<b>階段</b>が早いです。`;

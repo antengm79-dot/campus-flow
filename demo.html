@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1920">
+<title>Campus Flow 紹介</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;800&family=Noto+Sans+JP:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: #fff; }
+  .stage { position: relative; width: 1920px; height: 1080px; overflow: hidden; background: #F3F8FC; }
+  .wave1, .wave2, .wave3 { position: absolute; border-radius: 50%; }
+  .wave1 { width: 1800px; height: 900px; right: -700px; bottom: -520px; background: #75D6FF; opacity: .5; }
+  .wave2 { width: 1500px; height: 800px; right: -600px; bottom: -560px; background: #2FCDEA; opacity: .55; }
+  .wave3 { width: 1100px; height: 700px; right: -420px; bottom: -520px; background: #006FB8; opacity: .9; }
+  header { position: absolute; top: 34px; left: 64px; right: 64px; display: flex; align-items: baseline; gap: 28px; z-index: 5; }
+  header .brand { font-size: 26px; font-weight: 900; color: var(--blue-700); }
+  header h1 { font-size: 46px; font-weight: 900; color: var(--ink); letter-spacing: .01em; }
+  header .step { margin-left: auto; font-size: 18px; font-weight: 800; color: var(--ink-3); }
+
+  .uni { position: absolute; left: 64px; top: 116px; width: 1600px; height: 1000px; transform: scale(.8); transform-origin: 0 0; border: 0; border-radius: 12px; box-shadow: 0 16px 40px rgba(11,63,110,.16); background: #fff; transition: opacity .5s, filter .5s; }
+  .phone { position: absolute; right: 70px; top: 112px; width: 414px; height: 868px; transform: scale(.9); transform-origin: 100% 0; border: 0; transition: opacity .5s, filter .5s; background: transparent; }
+  .dim { opacity: .35; filter: grayscale(.6); }
+  .label { position: absolute; font-size: 20px; font-weight: 900; color: #fff; background: var(--blue-700); padding: 6px 14px; border-radius: 6px; z-index: 4; }
+  .label.l1 { left: 64px; top: 922px; }
+  .label.l2 { right: 160px; top: 900px; }
+
+  .cap { position: absolute; left: 0; right: 0; bottom: 0; height: 120px; background: rgba(11,63,110,.94); color: #fff; display: flex; align-items: center; padding: 0 64px; font-size: 34px; font-weight: 900; line-height: 1.4; z-index: 6; }
+  .cap span { opacity: 0; transition: opacity .35s; }
+  .cap span.on { opacity: 1; }
+
+  .cover { position: absolute; inset: 0; z-index: 10; background: #006FB8; color: #fff; display: flex; flex-direction: column; justify-content: center; padding: 0 140px; transition: opacity .6s; overflow: hidden; }
+  .cover.off { opacity: 0; pointer-events: none; }
+  .cover small { font-size: 28px; font-weight: 800; opacity: .85; }
+  .cover h2 { font-size: 120px; font-weight: 900; line-height: 1.1; margin-top: 20px; }
+  .cover p { font-size: 44px; font-weight: 900; margin-top: 26px; }
+  .cover .w { position: absolute; border-radius: 50%; }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="wave1"></div><div class="wave2"></div><div class="wave3"></div>
+  <header><span class="brand">Campus Flow</span><h1 id="h1">学内の人の流れが見えるアプリ</h1><span class="step" id="step"></span></header>
+  <iframe class="uni" id="uni" src="university.html"></iframe>
+  <iframe class="phone" id="phone" src="student.html?bare"></iframe>
+  <div class="label l1">大学向け 管理画面</div>
+  <div class="label l2">学生向け アプリ</div>
+  <div class="cap"><span id="cap"></span></div>
+
+  <div class="cover" id="cover">
+    <div class="w" style="width:1500px;height:900px;right:-500px;bottom:-560px;background:#2FCDEA;opacity:.5"></div>
+    <div class="w" style="width:1100px;height:800px;right:-380px;bottom:-560px;background:#128FC9;"></div>
+    <small style="position:relative">株式会社GRT ｜ MKIインターンシップ</small>
+    <h2 style="position:relative" id="ctitle">Campus Flow</h2>
+    <p style="position:relative" id="csub">学内の人の流れが見えるアプリ</p>
+  </div>
+</div>
+<script>
+const uni = document.getElementById('uni'), phone = document.getElementById('phone');
+window.Demo = {
+  cover(on, title, sub) {
+    document.getElementById('cover').classList.toggle('off', !on);
+    if (title) document.getElementById('ctitle').textContent = title;
+    if (sub) document.getElementById('csub').textContent = sub;
+  },
+  focus(which) {
+    uni.classList.toggle('dim', which === 'phone');
+    phone.classList.toggle('dim', which === 'uni');
+  },
+  title(t, step) { document.getElementById('h1').textContent = t; document.getElementById('step').textContent = step || ''; },
+  caption(t) {
+    const c = document.getElementById('cap');
+    c.classList.remove('on');
+    setTimeout(() => { c.textContent = t; c.classList.add('on'); }, 200);
+  },
+  U: () => uni.contentWindow,
+  P: () => phone.contentWindow,
+};
+</script>
+</body>
+</html>
