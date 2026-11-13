@@ -281,10 +281,10 @@
       <button data-v="plans">プラン選択 <span class="pt" id="nav-plans"></span></button>
       <div class="sep-l">施設</div>
       <button data-v="cafeteria" data-need="food">学食 <span class="pt"><i>小</i></span></button>
-      <button data-v="classroom" data-need="rooms">教室 <span class="pt"><i>中</i></span></button>
-      <button data-v="gym" data-need="rooms">体育館 <span class="pt"><i>中</i></span></button>
-      <button data-v="studio" data-need="rooms">スタジオ・音楽練習室 <span class="pt"><i>中</i></span></button>
-      <button data-v="club" data-need="rooms">部室 <span class="pt"><i>中</i></span></button>
+      <button data-v="classroom" data-need="rooms">教室 <span class="pt"><i>大</i></span></button>
+      <button data-v="gym" data-need="rooms">体育館 <span class="pt"><i>大</i></span></button>
+      <button data-v="studio" data-need="rooms">スタジオ・音楽練習室 <span class="pt"><i>大</i></span></button>
+      <button data-v="club" data-need="rooms">部室 <span class="pt"><i>大</i></span></button>
       <button data-v="elevator" data-need="elevator">エレベーター <span class="pt"><i>中</i></span></button>
       <div class="sep-l">運用・レポート</div>
       <button data-v="cleaning" data-need="clean">清掃員の配置 <span class="pt"><i>大</i></span></button>
@@ -517,7 +517,7 @@ const PLAN_DEF = {
 };
 const TIERS = {
   s: { no: '①', nm: '小規模プラン', area: '学食', feats: ['food'], rooms: false, cams: 10, dev: 500, conn: 10, total: 510 },
-  m: { no: '②', nm: '中規模プラン', area: '学食 ＋ 教室・共用スペース', feats: ['food', 'elevator'], rooms: true, cams: 50, dev: 1000, conn: 50, total: 1050 },
+  m: { no: '②', nm: '中規模プラン', area: '学食 ＋ 教室・共用スペース', feats: ['food', 'elevator'], rooms: false, cams: 50, dev: 1000, conn: 50, total: 1050 },
   l: { no: '③', nm: '大規模プラン', area: '大学施設全体', feats: ['food', 'elevator', 'clean', 'energy'], rooms: true, cams: 100, dev: 2000, conn: 100, total: 2100 },
 };
 let tier = TIERS[qs.get('tier')] ? qs.get('tier') : 'l';
